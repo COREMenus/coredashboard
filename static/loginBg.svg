@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2492.731" height="2783" viewBox="0 0 2492.731 2783">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1.054" y1="0.373" x2="-0.426" y2="0.755" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1e7efc"/>
+      <stop offset="1" stop-color="#ff0060"/>
+    </linearGradient>
+    <pattern id="pattern" width="1" height="1" viewBox="-2159.634 -2423.282 4052.128 6079.284">
+    </pattern>
+    <linearGradient id="linear-gradient-2" x1="0.69" y1="0.218" x2="-0.069" y2="0.381" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff2c00"/>
+      <stop offset="1" stop-color="#eb991f"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.099" y1="-0.175" x2="0.554" y2="1.024" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffb378"/>
+      <stop offset="1" stop-color="#f6a661"/>
+    </linearGradient>
+  </defs>
+  <path id="Path_32" data-name="Path 32" d="M0,670.487C4.319,666.487,229.805,516,490.4,648s640.778,684.487,639.643,164.487,0-810,0-810L0,0Z" transform="translate(1017.442 2369.403) rotate(-90)" stroke="#707070" stroke-width="1" fill="url(#linear-gradient)"/>
+  <rect id="customer-uploading-order-via-qr-code-2021-12-09-20-23-23-utc" width="1855" height="2783" opacity="0.35" fill="url(#pattern)"/>
+  <path id="Path_33" data-name="Path 33" d="M0,182.034S296.7-45.127,526.193,88.873s399.815,208,477.8,146c1.114,40,0,207.161,0,207.161H0Z" transform="translate(1525.127 2232) rotate(-90)" opacity="0.34" fill="url(#linear-gradient-2)"/>
+  <path id="Path_34" data-name="Path 34" d="M41.806,26.558S123.264-50,282.977-12.464,483.1,83.627,654.644,171.206s442.586,120.655,562.023,39.719c-30.416,148.931-6.736,235.679-20.183,298.942s-16.973,1.038-100.63-21.39S-27.976,373.443-29.319,361.178,41.806,26.558,41.806,26.558Z" transform="matrix(-0.208, -0.978, 0.978, -0.208, 1624.643, 2455.934)" opacity="0.28" fill="url(#linear-gradient-3)"/>
+  <path id="Subtraction_3" data-name="Subtraction 3" d="M1309.9,887.84H0V63.951c15.748-6.922,32.678-13.565,50.32-19.742,22.694-7.946,46.193-14.978,69.844-20.9C181.94,7.842,244.088,0,304.884,0c20.839,0,41.756.938,62.168,2.789,21.747,1.971,43.51,5.03,64.685,9.094a637.438,637.438,0,0,1,134.252,41.47c39.172,17.023,86.1,37.141,137.115,57.28,26.337,10.4,52.094,20.125,76.556,28.916,27.452,9.866,54.445,18.974,80.227,27.071,28.27,8.878,56.078,16.854,82.653,23.7,28.72,7.4,56.926,13.735,83.833,18.817,28.782,5.436,56.965,9.61,83.768,12.407,14.025,1.464,27.978,2.582,41.47,3.324,13.877.763,27.667,1.151,40.987,1.151h.022c20.436,0,40.488-.91,59.6-2.705a534.721,534.721,0,0,0,57.683-8.534V887.838Z" transform="translate(1604.891 2356.902) rotate(-90)" fill="#fff"/>
+</svg>
