@@ -25,12 +25,9 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
-  router: {
-    prefetchLinks: false
-  },
-
   server: {
-    port: '8000'
+    port: process.env.PORT,
+    host: process.env.HOST
   },
 
   loading: '~/components/general/Loading.vue',
@@ -60,7 +57,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://localhost:3001/',
+    baseURL: process.env.API_BASE_URL,
     progress: false,
     retry: { retries: 3 }
 },
@@ -158,7 +155,8 @@ export default {
   },
 
   router: {
-    middleware: ['auth']
+    middleware: ['auth'],
+    prefetchLinks: false
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
