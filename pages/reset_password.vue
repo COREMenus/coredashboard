@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="center">
+    <v-row class="mt-5" justify="center">
       <v-col cols="6">
         <v-alert v-if="success" type="success" outlined>
           Password was reset, now you can login with your new password
@@ -9,8 +9,8 @@
         <v-alert v-else-if="error" type="error" outlined>
           {{ errorMessage }}
         </v-alert>
-        <v-card v-else>
-          <v-card-title> Reset Password </v-card-title>
+        <v-card v-else flat>
+          <v-card-title> {{$t('reset_password')}} </v-card-title>
           <v-card-text>
             <v-form ref="form" v-model="valid">
               <v-text-field
@@ -19,7 +19,7 @@
                 :rules="[rules.required]"
                 dense
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                label="New Password"
+                :label="$t('new_password')"
                 :type="showPassword ? 'text' : 'password'"
                 @click:append="showPassword = !showPassword"
               ></v-text-field>
@@ -28,13 +28,13 @@
                 outlined
                 dense
                 :rules="[rules.required, rules.passwordMatch]"
-                label="Confirm Password"
+                :label="$t('confirm_password')"
                 type="password"
               ></v-text-field>
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" block @click="reset"> Reset </v-btn>
+            <v-btn color="primary" block @click="reset"> {{$t('reset')}} </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>

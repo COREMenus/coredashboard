@@ -12,13 +12,20 @@
     />
 
     <v-main>
-      <v-alert v-if="expired" icon="mdi-alert-box" type="warning">
-        {{ $t('no_sub') }} 
-        <nuxt-link :to="localePath('/subscribe')"> {{$t('subscribe')}} </nuxt-link>
-      </v-alert>
-      <v-alert v-if="trail" type="info" dismissible>
-        {{ daysLeft }} {{$t('on_trail')}}
-      </v-alert>
+      <v-container>
+        <v-alert v-if="expired" icon="mdi-alert-box" type="warning">
+          {{ $t('no_sub') }}
+          <nuxt-link :to="localePath('/subscribe')">
+            {{ $t('subscribe') }}
+          </nuxt-link>
+        </v-alert>
+        <v-alert v-if="trail" type="info" dismissible>
+          {{ daysLeft }} {{ $t('on_trail') }}
+        </v-alert>
+        <v-alert v-if="!valid" type="warning" dismissible>
+          {{$t('not_verified')}}
+        </v-alert>
+      </v-container>
       <nuxt />
     </v-main>
   </v-app>
@@ -34,6 +41,7 @@ export default {
   middleware: ['onboarded', 'admin'],
   data() {
     return {
+      valid: false,
       expired: false,
       trail: false,
       daysLeft: 0,
@@ -85,6 +93,9 @@ export default {
         moment(),
         'days'
       )
+    }
+    if (this.$auth.user.valid) {
+      this.valid = true
     }
   },
   methods: {

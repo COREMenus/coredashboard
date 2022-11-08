@@ -11,7 +11,14 @@
                 }}</span>
               </v-alert>
             </transition>
+            <v-card v-if="created" color="success" dark>
+                <v-card-title> {{ $t('account_created')}} </v-card-title>
+                <v-card-text class="text--primary text-subtitle-1">
+                    {{$t('account_created_description')}}
+                </v-card-text>
+            </v-card>
             <v-card
+              v-else
               ref="form"
               height="350"
               :loading="loading"
@@ -73,7 +80,7 @@
                   </p>
                 </div>
               </v-card-text>
-            </v-card>
+            </v-card>  
       </v-col>
     </v-row>
   </v-container>
@@ -87,6 +94,7 @@ export default {
   layout: 'auth',
   data() {
     return {
+      created: false,
       passwordToolTip: false,
       btypes: [
         'Coffee Shop',
@@ -141,12 +149,14 @@ export default {
         this.loading = true
         try {
           await this.$axios.post('/api/accounts', this.userData)
-          await this.$auth.loginWith('localAdmin', {
-            data: {
-              username: this.userData.email,
-              password: this.userData.password,
-            },
-          })
+          this.created = true
+          
+        //   await this.$auth.loginWith('localAdmin', {
+        //     data: {
+        //       username: this.userData.email,
+        //       password: this.userData.password,
+        //     },
+        //   })
         } catch (error) {
           this.errorMessages = []
           this.error = true

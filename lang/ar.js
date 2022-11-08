@@ -54,14 +54,21 @@ export default async (context, locale) => {
         email: 'البريد الإلكتروني',
         username: 'اسم المستخدم',
         password: 'كلمة المرور',
+        confirm_password: 'تأكيد كلمة المرور',
         remember_me: 'تذكرنى',
         forgot_password: 'هل نسيت كلمة السر',
         create_account: 'حساب جدجد',
         have_account: 'لديك حساب؟',
         login_panel: 'التسجيل في لوحة استقبال الطلبات',
         reset_password: 'اعادة تعيين كلمة المرور',
+        new_password: 'كلمة المرور الجديدة',
         reset_password_desc: 'سيتم ارسال رابط تعيين كلمة المرور في بيردك الالكتروني',
-        sent_reset_link: 'تم ارسال راب تعيين كلمة المرور في بريدك',
+        reset_link_sent: 'تم ارسال رابط تعيين كلمة المرور في بريدك',
+        account_created: 'تم إنشاء الحساب بنجاح',
+        account_created_description: 'لاتمام تسجيل الدخول، تحقق من صندوق بريدك الالكتروني لتأكيد حسابك.',
+        reset: 'اعادة تعيين',
+        not_verified: 'الرجاء التأكد من صندوق بريدك الالكتروني لتأكيد حسابك',
+
 
         // * Shops
         your_shops: 'متاجرك',

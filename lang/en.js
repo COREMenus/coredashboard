@@ -54,14 +54,16 @@ export default async (context, locale) => {
         email: 'email',
         username: 'Username',
         password: 'Password',
+        confirm_password: 'Confirm Password',
         remember_me: 'Remember Me',
         forgot_password: 'Forgot Password',
         create_account: 'Create Account',
         have_account: 'Aready have an account?',
         login_panel: 'Go To Panel Login',
         reset_password: 'Reset Password',
+        new_password: 'New Password',
         reset_password_desc: 'If email exists, you will recieve an email with reset password link.',
-        sent_reset_link: 'We have sent you a reset link, check your email.',
+        reset_link_sent: 'We have sent you a reset link, check your email.',
 
         // * Shops
         your_shops: 'Your Shops',
@@ -197,6 +199,11 @@ export default async (context, locale) => {
         shop_unique: 'Shop name must be unique',
         shop_taken: 'Name is taken',
         shop_name: 'Shop Name',
+        account_created: 'Account Created',
+        account_created_description: 'Your account has been created succssfully. To finish registeration, please check your email inbox to confirm your email address.',
+        reset: 'Reset',
+        not_verified: 'Please check your inbox, and confirm your email address.',
+
 
 
         billing_settings: 'Billing Settings',
