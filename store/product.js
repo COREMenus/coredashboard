@@ -32,7 +32,6 @@ export const state = () => ({
         calories: 0,
         labels: [],
         warnings: [],
-        product_translations: []
     }
 })
 
@@ -50,11 +49,12 @@ export const mutations = {
         })
     },
     setEditProduct(state, product) {
+        state.editProduct = {}
         state.editTranslations = []
         state.editImages = []
         state.defaultProduct.images = []
         state.editProduct = Object.assign({}, state.defaultProduct, product)
-        state.editTranslations = state.editProduct.product_translations
+        if (state.editProduct.product_translations) state.editTranslations = state.editProduct.product_translations
         state.editImages = state.editProduct.images || []
     },
     addProduct(state, product) {

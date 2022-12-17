@@ -3,8 +3,8 @@
     <v-row>
       <v-col>
         <v-btn-toggle v-model="mode">
-          <v-btn> {{$t('monthly')}} </v-btn>
-          <v-btn> {{$t('annual')}} </v-btn>
+          <v-btn> {{ $t('monthly') }} </v-btn>
+          <v-btn> {{ $t('annual') }} </v-btn>
         </v-btn-toggle>
       </v-col>
     </v-row>
@@ -21,7 +21,7 @@
               {{ $t('per_month') }}
             </h2>
             <v-list>
-              <v-subheader>{{$t('features')}}</v-subheader>
+              <v-subheader>{{ $t('features') }}</v-subheader>
               <v-list-item :key="i">
                 <v-list-item-icon>
                   <v-icon small color="primary"> mdi-check </v-icon>
@@ -42,7 +42,7 @@
                 )
               "
             >
-              {{$t('checkout')}}
+              {{ subscribed ? $t('upgrade') : $t('checkout') }}
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -56,6 +56,8 @@ export default {
   name: 'SubscribePage',
   data() {
     return {
+      subscribed: false,
+      subscription: null,
       mode: 0,
       plans: [
         {
@@ -85,15 +87,42 @@ export default {
       ],
     }
   },
+  async mounted() {
+    try {
+      const subscirptionId = this.$auth.user.stripe_subscription_id
+      if (subscirptionId) {
+        
+        const res = await this.$axios.get(
+          `/api/stripe/get-subscription/${subscirptionId}`
+        )
+        const subscription = res.data
+        this.subscription = subscription
+        this.subscribed = subscription.status === 'active'
+      }
+    } catch (error) {}
+  },
   methods: {
     async checkout(priceId) {
       try {
-        const res = await this.$axios.post(
-          `/api/stripe/create-checkout-session/${priceId}`
-        )
-        const url = res.data.url
-        window.location.replace(url)
+        if (this.subscribed) {
+          await this.$axios.put(`/api/stripe/update-subscription/${this.subscription.id}`, {
+            price_id: priceId
+          })
+          this.$router.push(
+            this.localePath({
+              name: 'upgraded',
+              query: { subscription_id: this.subscription.id },
+            })
+          )
+        } else {
+          const res = await this.$axios.post(
+            `/api/stripe/create-checkout-session/${priceId}`
+          )
+          const url = res.data.url
+          window.location.replace(url)
+        }
       } catch (error) {
+        console.log(error)
         this.$toast.error(this.$t('error_occured'))
       }
     },

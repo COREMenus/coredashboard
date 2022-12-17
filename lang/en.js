@@ -119,6 +119,7 @@ export default async (context, locale) => {
 
         // * Orders
         orders: 'Orders',
+        receive_orders: 'Receive Orders',
         todays_orders: "Today's Orders",
         select_branch: 'Select Branch',
         new_order: 'New Order',
@@ -182,6 +183,7 @@ export default async (context, locale) => {
         basic_plan: "Basic Plan",
         intermediate_plan: 'Intermediate Plan',
         premium_plan: 'Premium Plan',
+        upgrade: 'Upgrade',
 
 
         // * Onboarding and account settings

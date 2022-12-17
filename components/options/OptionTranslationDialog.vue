@@ -103,6 +103,7 @@ export default {
         this.dialog = false
       } catch (error) {
         this.$toast.error(this.$t('error_occured'))
+        console.log(error)
       }
     },
   },

@@ -82,7 +82,7 @@ export default {
     },
     computed: {
         ...mapState("product", ["editProduct"]),
-        ...mapState("option", ["editOption"]),
+        ...mapState("option", ["editOption", "editTranslations"]),
         ...mapFields([
             "editOption.name",
             "editOption.calories",
@@ -102,7 +102,12 @@ export default {
                 else if (this.editProduct.id) {
                     const res = await this.$axios.post(`/api/products/options/${this.editProduct.id}`, {
                         ...this.editOption,
+                        product_option_translations: this.editTranslations
                     });
+                    console.log({
+                        ...this.editOption,
+                        product_option_translations: this.editTranslations
+                    })
                     this.addOption(res.data);
                 }
                 else {

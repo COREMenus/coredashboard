@@ -79,7 +79,7 @@
             >
              {{$t('confirm_order')}}
             </v-btn>
-            <v-btn v-if="item.status === 'pending'" icon>
+            <v-btn v-if="item.status === 'pending'" icon @click="declineOrder(item)">
               <v-icon color="red">mdi-window-close</v-icon>
             </v-btn>
             <v-btn v-if="item.status === 'confirmed'" icon @click="orderReady(item)">
@@ -153,7 +153,7 @@ export default {
   },
   computed: {
     filteredOrders() {
-        return this.orders.filter(o => o.status !== 'completed')
+        return this.orders.filter(o => o.status !== 'completed' && o.status !== 'declined')
     },
     pendingOrders() {
         return this.orders.filter(o => o.status === 'pending')
@@ -238,6 +238,13 @@ export default {
         this.beep.pause()
       }
       this.socket.emit('orders:confirm', order.id)
+    },
+    declineOrder(order) {
+        order.status = 'declined'
+        if (this.pendingOrders.length < 1) {
+        this.beep.pause()
+        }
+        this.socket.emit('orders:decline', order.id)
     },
     orderReady(order) {
       order.status = 'ready'

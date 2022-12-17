@@ -13,6 +13,7 @@
             <v-card-title> {{$t('billing_settings')}} </v-card-title>
             <v-card-text class="text--primary">
                 <v-btn outlined color="primary" block :href="customerPortalUrl"> {{$t('billing_manager')}} </v-btn>
+                <v-btn class="mt-3" outlined color="primary" block :to="localePath('/subscribe')">{{$t('subscribe')}}</v-btn>
             </v-card-text>
         </v-card>
       </v-col>

@@ -15,6 +15,7 @@
             outlined
             dense
             :label="$t('select_branch')"
+            @change="fetchOrders"
           ></v-select>
         </v-col>
         <v-col>

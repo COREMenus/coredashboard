@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="dialog" width="400">
-    <v-card>
+    <v-card v-if="dialog">
       <v-card-title> {{ mode === 'edit' ? 'Edit' : 'New' }} User </v-card-title>
       <v-card-text>
         <v-text-field
@@ -48,7 +48,8 @@ export default {
     ...mapFields(['editUser.username', 'editUser.password']),
     ...mapState('shop', ['shop']),
     domain() {
-        return `@${this.shop.name.toLowerCase().split(' ').join('_')}`
+        console.log(this.shop.name ? 'yes':'no')
+        return ``
     }
   },
   methods: {

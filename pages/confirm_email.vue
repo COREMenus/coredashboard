@@ -23,7 +23,6 @@
   <script>
   export default {
     name: 'VerifyPage',
-    auth: 'guest',
     layout: 'auth',
     data() {
       return {

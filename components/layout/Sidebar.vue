@@ -82,7 +82,7 @@ export default {
           to: 'shop-shopId-branches',
         },
         {
-            name: 'orders',
+            name: 'receive_orders',
             icon: 'mdi-alarm-light',
             to: 'shop-shopId-orders_panel'
         },

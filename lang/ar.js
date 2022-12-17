@@ -125,6 +125,7 @@ export default async (context, locale) => {
 
         // * Orders
         orders: 'الطلبات',
+        receive_orders: 'استقبال الطلبات',
         todays_orders: 'طلبات اليوم',
         select_branch: 'حدد الفرع',
         new_order: 'طلب جديد',
@@ -189,6 +190,7 @@ export default async (context, locale) => {
          basic_plan: "الخطة الأساسية",
          intermediate_plan: 'الخطة المتوسطة',
          premium_plan: 'خطة بريميوم',
+         upgrade: 'ترقية',
 
         account_info: 'معلومات الحساب',
         first_name: 'الاسم الاول',

@@ -24,7 +24,7 @@
       <v-data-table
         :sort-by="['createdAt']"
         :sort-desc="[true, false]"
-        :items="orders"
+        :items="ordersToShow"
         :headers="headers"
       >
         <template #[`item.createdAt`]="{ item }">
@@ -71,35 +71,6 @@
               </v-card-text>
             </v-card>
           </v-dialog>
-          <v-btn
-            v-if="item.status === 'pending'"
-            x-small
-            depressed
-            dark
-            color="green"
-            @click="confirmOrder(item)"
-          >
-            {{ $t('confirm_order') }}
-          </v-btn>
-          <v-btn v-if="item.status === 'pending'" icon>
-            <v-icon color="red">mdi-window-close</v-icon>
-          </v-btn>
-          <v-btn
-            v-if="item.status === 'confirmed'"
-            icon
-            @click="orderReady(item)"
-          >
-            <v-icon color="green">mdi-check</v-icon>
-          </v-btn>
-          <v-btn
-            v-if="item.status === 'ready'"
-            x-small
-            dark
-            color="green"
-            @click="completeOrder(item)"
-          >
-            {{ $t('complete_order') }}
-          </v-btn>
         </template>
       </v-data-table>
     </v-card>
@@ -113,6 +84,7 @@ export default {
   data() {
     return {
       orders: [],
+      ordersToShow: [],
       branches: [],
       branch: '',
       headers: [
@@ -180,9 +152,9 @@ export default {
             return 'None'
         }
     },
-    async changeBranch() {
+    changeBranch() {
       try {
-        await this.fetchOrders()
+        this.ordersToShow = this.orders.filter(order => order.BranchId === this.branch)
       } catch (error) {}
     },
     formatDate(date) {
@@ -197,6 +169,7 @@ export default {
           `/api/orders/${this.$route.params.shopId}/orders`
         )
         this.orders = res.data
+        this.ordersToShow = this.orders
         console.log(res.data)
       } catch (error) {
         this.$toast.error(this.$t('error_occured'))

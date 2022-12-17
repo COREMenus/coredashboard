@@ -4,12 +4,7 @@ import { getField, updateField } from "vuex-map-fields"
 export const state = () => ({
      // * Options
      editOptions: [],
-     editOption: {
-         name: '',
-         price: 0,
-         calories: 0,
-         product_option_translations: []
-     },
+     editOption: {},
     // * Translation
     editTranslations: [],
     editTranslation: {
@@ -22,7 +17,6 @@ export const state = () => ({
         name: '',
         price: 0,
         calories: 0,
-        product_option_translations: []
     },
     defaultTranslation: {
         name: '',
@@ -40,8 +34,8 @@ export const mutations = {
     setEditOption(state, option) {
         state.editOption = {}
         state.editTranslations = []
-        Object.assign(state.editOption, state.defaultOption, option)
-        state.editTranslations = state.editOption.product_option_translations
+        state.editOption = Object.assign({}, state.defaultOption, option)
+        if (state.editOption.product_option_translations) state.editTranslations = state.editOption.product_option_translations
     },
     addOption(state, option) {
         state.editOptions.push(option)
@@ -65,8 +59,7 @@ export const mutations = {
     },
     addTranslation(state, translation) {
         state.editTranslations.push(translation)
-        state.editOption.product_option_translations = state.editTranslations
-
+        // state.editOption.product_option_translations = state.editTranslations
     },
     setTranslation(state, translation) {
         state.editTranslations = state.editTranslations.map(t => {

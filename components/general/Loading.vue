@@ -1,6 +1,6 @@
 <template>
   <div v-if="loading" class="loading-page">
-    <img class="loading" src="/logo.png" alt="">
+    <img class="loading" src="/loading.gif" alt="">
     Loading
   </div>
 </template>
@@ -31,8 +31,8 @@ export default {
     z-index: 9999;
 }
 .loading {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   right: 0;
   left: 0;
   margin: 0 auto;
@@ -45,7 +45,7 @@ export default {
         transform: scale(1.0);
     }
     50% {
-        transform: scale(0.8);
+        transform: scale(0.9);
     }
     100% {
         transform: scale(1.0);
