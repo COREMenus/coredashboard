@@ -30,6 +30,10 @@ export default {
     host: process.env.HOST
   },
 
+  env: {
+    QR_URL: process.env.QR_URL
+  },
+
   loading: '~/components/general/Loading.vue',
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
