@@ -173,7 +173,7 @@ export default {
   },
   async created() {
     try {
-      const socket = io('http://localhost:3001')
+      const socket = io(process.env.API_BASE_URL)
       this.socket = socket
 
       const shop = this.$auth.user.ShopId

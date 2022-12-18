@@ -38,7 +38,7 @@ export default {
     computed: {
         link() {
             const shop = this.$route.params.shopId
-            return `http://localhost:3000/shop/${shop}?branch=${this.branch}&${this.type || ''}=${this.number || ''}`
+            return `${process.env.QR_URL}/shop/${shop}?branch=${this.branch}&${this.type || ''}=${this.number || ''}`
         },
         qrlink() {
             const color = this.color.split('#').join('')
