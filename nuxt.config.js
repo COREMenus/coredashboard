@@ -28,6 +28,11 @@ export default {
   server: {
     port: process.env.PORT,
     host: process.env.HOST,
+  },
+
+  env: {
+    QR_URL: process.env.QR_URL,
+    API_BASE_URL: process.env.API_BASE_URL, 
     BASIC_MONTHLY_PRICE: process.env.BASIC_MONTHLY_PRICE,
     BASIC_ANNUAL_PRICE: process.env.BASIC_ANNUAL_PRICE,
 
@@ -36,11 +41,6 @@ export default {
 
     PREMIUM_MONTHLY_PRICE: process.env.PREMIUM_MONTHLY_PRICE,
     PREMIUM_ANNUAL_PRICE: process.env.PREMIUM_ANNUAL_PRICE
-  },
-
-  env: {
-    QR_URL: process.env.QR_URL,
-    API_BASE_URL: process.env.API_BASE_URL
   },
 
   loading: '~/components/general/Loading.vue',
