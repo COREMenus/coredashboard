@@ -27,7 +27,15 @@ export default {
 
   server: {
     port: process.env.PORT,
-    host: process.env.HOST
+    host: process.env.HOST,
+    BASIC_MONTHLY_PRICE: process.env.BASIC_MONTHLY_PRICE,
+    BASIC_ANNUAL_PRICE: process.env.BASIC_ANNUAL_PRICE,
+
+    INTER_MONTHLY_PRICE: process.env.INTER_MONTHLY_PRICE,
+    INTER_ANNUAL_PRICE: process.env.INTER_ANNUAL_PRICE,
+
+    PREMIUM_MONTHLY_PRICE: process.env.PREMIUM_MONTHLY_PRICE,
+    PREMIUM_ANNUAL_PRICE: process.env.PREMIUM_ANNUAL_PRICE
   },
 
   env: {
