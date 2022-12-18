@@ -31,7 +31,8 @@ export default {
   },
 
   env: {
-    QR_URL: process.env.QR_URL
+    QR_URL: process.env.QR_URL,
+    API_BASE_URL: process.env.API_BASE_URL
   },
 
   loading: '~/components/general/Loading.vue',
