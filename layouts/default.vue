@@ -1,3 +1,4 @@
+/* Default Layout is for Admin, If user is not admin redirect to Panel */
 <template>
   <v-app :style="{ background: $vuetify.theme.themes[theme].background }">
     <v-system-bar app height="30" color="primary" dark>
@@ -5,11 +6,9 @@
       <h3>{{ time }}</h3>
     </v-system-bar>
 
-    <navbar
-      @mini="$router.push(localePath('/'))"
-      @drawer="$router.push(localePath('/'))"
-      @open-settings="$refs.dialog.dialog = true"
-    />
+    <!-- Sidebar only shows when it's on shop page by checking for shop.id -->
+    <Sidebar ref="drawer" :mini="mini" :drawer="drawer" />
+    <navbar @mini="mini = !mini" @drawer="drawer = !drawer" @open-settings="$refs.dialog.dialog = true" />
 
     <v-main>
       <v-container>
@@ -23,7 +22,7 @@
           {{ daysLeft }} {{ $t('on_trail') }}
         </v-alert>
         <v-alert v-if="!valid" type="warning" dismissible>
-          {{$t('not_verified')}}
+          {{ $t('not_verified') }}
         </v-alert>
       </v-container>
       <nuxt />
@@ -35,10 +34,11 @@
 import moment from 'moment'
 import { mapActions, mapGetters } from 'vuex'
 import Navbar from '~/components/layout/Navbar.vue'
+import Sidebar from '~/components/layout/Sidebar.vue'
 export default {
   name: 'DefaultLayout',
-  components: { Navbar },
-  middleware: ['onboarded', 'admin'],
+  components: { Navbar, Sidebar },
+  middleware: 'auth',
   data() {
     return {
       valid: false,
@@ -81,12 +81,21 @@ export default {
     }, 1000)
   },
   created() {
+    // Check Admin
+    const isAdmin = this.$auth.user.role === 'admin'
+    if (!isAdmin) return this.$router.push(this.localePath({ name: 'orders' }))
+
+    // Onboard
+    this.onBoard()
+
+    // Check Subscription
     const nextBillingDate = moment(this.$auth.user.next_billing_date)
     const now = moment()
     if (now.isAfter(nextBillingDate) || !this.$auth.user.next_billing_date) {
       this.expired = true
     }
 
+    // Free Trail
     if (this.$auth.user.free_trail) {
       this.trail = true
       this.daysLeft = moment(this.$auth.user.next_billing_date).diff(
@@ -104,6 +113,17 @@ export default {
       try {
         await this.$auth.logout()
       } catch (error) {}
+    },
+    onBoard() {
+      const account = this.$auth.user
+      // * If no Name or Phone Number, redirect to step 1
+      if (!account.first_name || !account.last_name) {
+        return this.$router.push(this.localePath('/onboarding'))
+      }
+      // * If no company name or country, redirect to step 2
+      else if (!account.company || !account.country) {
+        return this.$router.push(this.localePath('/onboarding?step=2'))
+      }
     },
     toggle() {
       if (this.$vuetify.breakpoint.mdAndDown) {

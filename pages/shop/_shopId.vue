@@ -7,7 +7,6 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 export default {
-    layout: 'shop',
   data() {
     return {
         mini: true, 

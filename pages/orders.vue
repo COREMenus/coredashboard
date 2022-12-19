@@ -100,9 +100,7 @@ import { io } from 'socket.io-client'
 import moment from 'moment'
 export default {
   name: 'OrdersPage',
-  layout(context) {
-    return context.$auth.user.role === 'admin' ? 'shop' : 'panel'
-  },
+  layout: 'panel',
   data() {
     return {
       branch: '',

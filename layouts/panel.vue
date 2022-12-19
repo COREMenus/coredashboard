@@ -16,7 +16,7 @@
 <script>
 export default {
   name: 'PanelLayout',
-
+  middleware: 'auth',
   computed: {
     theme() {
       return this.$vuetify.theme.dark ? 'dark' : 'light'
