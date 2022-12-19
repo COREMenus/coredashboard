@@ -1,6 +1,5 @@
 <template>
   <v-container fill-height>
-    <change-card-dialog ref="changeCardDialog"></change-card-dialog>
     <!-- Personal Info -->
     <v-row class="mt-5" justify="center">
       <v-col cols="10">
@@ -25,10 +24,9 @@
 import moment from 'moment'
 import { mapGetters, mapState } from 'vuex'
 import InfoSettings from '~/components/settings/InfoSettings.vue'
-import ChangeCardDialog from '~/components/checkout/ChangeCardDialog.vue'
 
 export default {
-  components: { InfoSettings, ChangeCardDialog },
+  components: { InfoSettings },
   data() {
     return {
         customerPortalUrl: '',
