@@ -137,7 +137,6 @@ export default {
       const res = await this.$axios.get(
         `/api/branches/${shop}/branches`
       )
-      console.log(res.data)
       this.branches = res.data
     } catch (error) {
       this.$toast.error(this.$t('error_occured'))
@@ -170,7 +169,6 @@ export default {
         )
         this.orders = res.data
         this.ordersToShow = this.orders
-        console.log(res.data)
       } catch (error) {
         this.$toast.error(this.$t('error_occured'))
       }

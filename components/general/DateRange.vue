@@ -21,12 +21,14 @@
     <v-date-picker
     v-model="date"
     range
-    @change="$emit('date-change', date)"
+    @change="dateChange"
     ></v-date-picker>
   </v-menu>
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'DateRangeComponent',
   // eslint-disable-next-line vue/require-prop-types
@@ -37,9 +39,17 @@ export default {
         date: []
     }
   },
-  mounted() {
-    console.log(this.modelValue)
-  },
+  methods: {
+    dateChange() {
+        const firstDate = moment(this.date[0])
+        const secondDate = moment(this.date[1])
+        if (firstDate > secondDate) {
+            this.$emit('date-change', this.date.reverse())
+        } else {
+            this.$emit('date-change', this.date)
+        }
+    }
+  }
 
 }
 </script>

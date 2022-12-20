@@ -52,7 +52,7 @@ export default {
         const res = await this.$axios.post('/api/stripe/create-customer-portal')
         this.customerPortalUrl = res.data.url
     } catch (error) {
-        console.log(error)
+        
     }
   },
   methods: {

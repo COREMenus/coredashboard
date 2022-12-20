@@ -90,7 +90,6 @@ export const getters = {
 export const actions = {
     async fetchProductOptions({commit}, ProductId) {
         const res = await this.$axios.get(`/api/products/options/${ProductId}`)
-        console.log(res.data)
         commit('setEditOptions', res.data)
     }
 }

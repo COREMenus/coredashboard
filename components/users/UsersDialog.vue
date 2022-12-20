@@ -48,7 +48,6 @@ export default {
     ...mapFields(['editUser.username', 'editUser.password']),
     ...mapState('shop', ['shop']),
     domain() {
-        console.log(this.shop.name ? 'yes':'no')
         return ``
     }
   },
@@ -64,7 +63,7 @@ export default {
         this.dialog = false
         this.$toast.success(this.$t('saved'))
       } catch (error) {
-        console.log(error)
+        
         this.$toast.error(this.$t('error_occured'))
       }
     },

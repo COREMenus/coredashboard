@@ -149,7 +149,7 @@ export default {
         this.setMenus(newList)
         this.$toast.success(this.$t('saved'))
       } catch (error) {
-        console.log(error)
+        
       }
     },
   },

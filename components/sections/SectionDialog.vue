@@ -40,7 +40,6 @@ export default {
         if (this.mode === 'edit') {
             await this.updateSection()
         } else {
-            console.log(this.$route)
             await this.newSection(this.$route.params.menuId)
         }
         this.dialog = false

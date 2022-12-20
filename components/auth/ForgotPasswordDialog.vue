@@ -43,7 +43,7 @@ export default {
                     email: this.email
                 })
                 this.$toast.success(this.$t('reset_link_sent'))
-                this.dailog = false
+                this.dialog = false
             }
         } catch (error) {
         this.$toast.error(this.$t('error_occured'))

@@ -127,7 +127,6 @@ export default {
           this.imageKey = newKey
         }
       } catch (error) {
-        console.log(error)
         this.$toast.error(this.$t('error_occured'))
       }
     },

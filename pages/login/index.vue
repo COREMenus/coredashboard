@@ -141,7 +141,13 @@ export default {
         } catch (error) {
           this.errorMessages = []
           this.error = true
-          this.errorMessages = error.response.data.messages
+          if (error.response.status >= 500) {
+            this.errorMessages = [
+              'Unexpected Error Has Occured, Please try again later.',
+            ]
+          } else {
+            this.errorMessages = error.response.data.messages
+          }
         }
         this.loading = false
       }

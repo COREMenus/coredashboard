@@ -164,13 +164,13 @@ export default {
   },
   beforeDestroy() {
     if (this.interval) clearInterval(this.interval)
+    this.socket.disconnect()
   },
   mounted() {
     this.beep = new Audio('/notif.mp3')
     this.beep.loop = true
   },
   async created() {
-
     try {
       const socket = io(process.env.API_BASE_URL)
       this.socket = socket

@@ -21,7 +21,6 @@ export default {
     changeTheme() {
         this.$vuetify.theme.dark = !this.$vuetify.theme.dark
         if (process.client) {
-            console.log(this.$vuetify.theme.dark)
             localStorage.setItem('dark' , this.$vuetify.theme.dark)
         }
     }

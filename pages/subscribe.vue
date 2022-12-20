@@ -9,8 +9,8 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col v-for="(plan, i) in plans" :key="i" cols="4">
-        <v-card height="400">
+      <v-col v-for="(plan, i) in plans" :key="i" sm="12" md="4" lg="4">
+        <v-card height="400" class="d-flex flex-column">
           <v-card-title> {{ $t(plan.name) }} </v-card-title>
           <v-card-subtitle>
             {{ mode === 0 ? $t('billed_monthly') : $t('billed_annually') }}
@@ -32,6 +32,7 @@
               </v-list-item>
             </v-list>
           </v-card-text>
+          <v-spacer></v-spacer>
           <v-card-actions class="card-footer">
             <v-btn
               block
@@ -122,7 +123,7 @@ export default {
           window.location.replace(url)
         }
       } catch (error) {
-        console.log(error)
+        
         this.$toast.error(this.$t('error_occured'))
       }
     },

@@ -164,6 +164,7 @@ export default {
   },
   beforeDestroy() {
     if (this.interval) clearInterval(this.interval)
+    this.socket.disconnect()
   },
   mounted() {
     this.beep = new Audio('/notif.mp3')

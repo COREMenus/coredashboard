@@ -8,7 +8,7 @@
 
     <!-- Sidebar only shows when it's on shop page by checking for shop.id -->
     <Sidebar ref="drawer" :mini="mini" :drawer="drawer" />
-    <navbar @mini="mini = !mini" @drawer="drawer = !drawer" @open-settings="$refs.dialog.dialog = true" />
+    <navbar @mini="navBtn" @drawer="drawer = !drawer" @open-settings="$refs.dialog.dialog = true" />
 
     <v-main>
       <v-container>
@@ -32,7 +32,7 @@
 
 <script>
 import moment from 'moment'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 import Navbar from '~/components/layout/Navbar.vue'
 import Sidebar from '~/components/layout/Sidebar.vue'
 export default {
@@ -54,6 +54,7 @@ export default {
   },
   computed: {
     ...mapGetters('subscription', ['activeSubscription']),
+    ...mapState('shop', ['shop']),
     theme() {
       return this.$vuetify.theme.dark ? 'dark' : 'light'
     },
@@ -124,6 +125,13 @@ export default {
       else if (!account.company || !account.country) {
         return this.$router.push(this.localePath('/onboarding?step=2'))
       }
+    },
+    navBtn() {
+        if (this.shop.id) {
+            this.mini = !this.mini
+        } else {
+            this.$router.push(this.localePath('/'))
+        }
     },
     toggle() {
       if (this.$vuetify.breakpoint.mdAndDown) {

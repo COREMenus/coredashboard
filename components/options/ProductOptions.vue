@@ -62,7 +62,6 @@ export default {
                 this.removeOption(option)
                 this.$toast.success('Delete Option Successfully')
             } catch (error) {
-                console.log(error)
         this.$toast.error(this.$t('error_occured'))
             }
         }

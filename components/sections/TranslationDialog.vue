@@ -77,7 +77,6 @@ import TranslationFormDialog from './TranslationFormDialog.vue'
           this.removeTranslation(translation)
           this.$toast.success('Delete Tran Successfully')
         } catch (error) {
-          console.log(error)
           this.$toast.error(this.$t('error_occured'))
         }
       },

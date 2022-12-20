@@ -54,7 +54,6 @@ export default {
     }
   },
   async created() {
-        console.log(this.$route)
 
     await this.fetchOrders()
   },
@@ -67,9 +66,8 @@ export default {
         const res = await this.$axios.get(`/api/orders/${this.$route.params.shopId}/orders?from=${from}&to=${to}`)
         // get only completed orders
         this.orders = res.data.filter((o) => o.status === 'completed')
-        console.log(this.orders)
       } catch (error) {
-        console.log(error)
+        
         this.$toast.error(this.$t('error_occured'))
       }
     },

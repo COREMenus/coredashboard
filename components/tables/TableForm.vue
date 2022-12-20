@@ -72,7 +72,7 @@ export default {
         this.$toast.success(this.$t('saved'))
         this.dialog = false
       } catch (error) {
-        console.log(error)
+        
         this.$toast.error(this.$t('error_occured'))
       }
     },

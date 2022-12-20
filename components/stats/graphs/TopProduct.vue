@@ -61,7 +61,6 @@ export default {
             find.y += 1
         }
       })
-      console.log(data)
       return data
     },
 

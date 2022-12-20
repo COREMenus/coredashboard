@@ -104,10 +104,6 @@ export default {
                         ...this.editOption,
                         product_option_translations: this.editTranslations
                     });
-                    console.log({
-                        ...this.editOption,
-                        product_option_translations: this.editTranslations
-                    })
                     this.addOption(res.data);
                 }
                 else {
@@ -117,7 +113,6 @@ export default {
                 this.dialog = false;
             }
             catch (error) {
-                console.log(error);
                 this.$toast.error(this.$t("error_occured"));
             }
         },

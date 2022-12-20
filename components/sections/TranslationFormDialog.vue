@@ -81,7 +81,6 @@
         const res = await this.$axios.get(`/api/settings/${shopId}`)
         this.locales = res.data.enabled_languages
       } catch (error) {
-        console.log(error)
         this.$toast.error(this.$t('error_occured'))
       }
     },
@@ -112,7 +111,7 @@
           this.$toast.success(this.$t('saved'))
           this.dialog = false
         } catch (error) {
-            console.log(error)
+            
           this.$toast.error(this.$t('error_occured'))
         }
       },

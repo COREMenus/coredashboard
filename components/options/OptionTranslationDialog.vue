@@ -71,7 +71,6 @@ export default {
       const res = await this.$axios.get(`/api/settings/${shopId}`)
       this.locales = res.data.enabled_languages
     } catch (error) {
-      console.log(error)
       this.$toast.error(this.$t('error_occured'))
     }
   },
@@ -103,7 +102,6 @@ export default {
         this.dialog = false
       } catch (error) {
         this.$toast.error(this.$t('error_occured'))
-        console.log(error)
       }
     },
   },
