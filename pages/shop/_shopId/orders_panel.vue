@@ -17,7 +17,7 @@
       </v-row>
     </v-toolbar>
     <v-card class="mt-5">
-      <v-card-title> {{$t('todays_orders')}} </v-card-title>
+      <v-card-title> {{ $t('todays_orders') }} </v-card-title>
       <v-card-text>
         <v-data-table
           :sort-by="['createdAt']"
@@ -37,35 +37,100 @@
             }}</v-chip>
           </template>
           <template #[`item.actions`]="{ item }">
-            <v-dialog width="900">
+            <v-dialog width="700">
               <template #activator="{ attrs, on }">
                 <v-btn v-bind="attrs" icon v-on="on">
                   <v-icon>mdi-eye</v-icon>
                 </v-btn>
               </template>
               <v-card>
-                <v-card-title>{{$t('order')}} {{ item.id }}</v-card-title>
+                <v-card-title>{{ $t('order') }} {{ item.id }}</v-card-title>
                 <v-card-text class="text--primary">
+                  <!-- Order Details -->
                   <v-row>
                     <v-col>
-                      {{$t('branch')}}:
-                      {{ branches.find((b) => b.id === item.BranchId).name }}
+                      <v-text-field
+                        dense
+                        readonly
+                        :label="$t('branch')"
+                        :value="getBranch(item.BranchId)"
+                      />
                     </v-col>
                     <v-col>
-                      {{$t('time')}}: {{ formatDate(item.createdAt) }}
+                      <v-text-field
+                        dense
+                        readonly
+                        :label="$t('time')"
+                        :value="formatDate(item.createdAt)"
+                      />
                     </v-col>
-                    <v-col> {{$t('type')}}: {{ item.type }} </v-col>
+                    <v-col>
+                      <v-text-field
+                        dense
+                        readonly
+                        :label="$t('type')"
+                        :value="item.type"
+                      />
+                    </v-col>
                     <v-col v-if="item.type === 'car'">
-                      {{$t('car_number')}}: {{ item.car_number }}
+                      <v-text-field
+                        dense
+                        readonly
+                        :label="$t('car_number')"
+                        :value="item.car_number"
+                      />
                     </v-col>
                     <v-col v-if="item.type === 'table'">
-                      {{$t('table_number')}}: {{ item.table_number }}
+                      <v-text-field
+                        dense
+                        readonly
+                        :label="$t('table_number')"
+                        :value="item.table_number"
+                      />
                     </v-col>
                   </v-row>
-                  <v-data-table
-                    :items="item.orders_products"
-                    :headers="productsHeaders"
-                  ></v-data-table>
+
+                  <!-- Order Note -->
+                  <v-row>
+                    <v-col>
+                      <v-textarea
+                        readonly
+                        label="Notes"
+                        :value="item.note"
+                        rows="2"
+                      />
+                    </v-col>
+                  </v-row>
+
+                  <!-- Order Items -->
+                  <v-list elevation="2" class="mt-5">
+                    <v-subheader>Items</v-subheader>
+                    <v-list-item
+                      v-for="product in item.orders_products"
+                      :key="product.id"
+                    >
+                      <v-list-item-avatar>
+                        <v-img :src="product.product.images[0]"></v-img>
+                      </v-list-item-avatar>
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          {{ product.quantity }}x {{ product.product.name }}
+                        </v-list-item-title>
+                        <v-list-subtitle>
+                          {{
+                            product.product_option
+                              ? product.product_option.name
+                              : ''
+                          }}
+                        </v-list-subtitle>
+                      </v-list-item-content>
+                      <v-list-item-action>
+                        <v-btn color="red" icon>
+                          <v-icon>mdi-delete</v-icon>
+                        </v-btn>
+                      </v-list-item-action>
+                    </v-list-item>
+                  </v-list>
                 </v-card-text>
               </v-card>
             </v-dialog>
@@ -77,16 +142,30 @@
               color="green"
               @click="confirmOrder(item)"
             >
-             {{$t('confirm_order')}}
+              {{ $t('confirm_order') }}
             </v-btn>
-            <v-btn v-if="item.status === 'pending'" icon @click="declineOrder(item)">
+            <v-btn
+              v-if="item.status === 'pending'"
+              icon
+              @click="declineOrder(item)"
+            >
               <v-icon color="red">mdi-window-close</v-icon>
             </v-btn>
-            <v-btn v-if="item.status === 'confirmed'" icon @click="orderReady(item)">
+            <v-btn
+              v-if="item.status === 'confirmed'"
+              icon
+              @click="orderReady(item)"
+            >
               <v-icon color="green">mdi-check</v-icon>
             </v-btn>
-            <v-btn v-if="item.status === 'ready'" x-small dark color="green" @click="completeOrder(item)">
-              {{$t('complete_order')}}
+            <v-btn
+              v-if="item.status === 'ready'"
+              x-small
+              dark
+              color="green"
+              @click="completeOrder(item)"
+            >
+              {{ $t('complete_order') }}
             </v-btn>
           </template>
         </v-data-table>
@@ -153,14 +232,16 @@ export default {
   },
   computed: {
     filteredOrders() {
-        return this.orders.filter(o => o.status !== 'completed' && o.status !== 'declined')
+      return this.orders.filter(
+        (o) => o.status !== 'completed' && o.status !== 'declined'
+      )
     },
     pendingOrders() {
-        return this.orders.filter(o => o.status === 'pending')
+      return this.orders.filter((o) => o.status === 'pending')
     },
     isAdmin() {
-        return this.$auth.user.role === 'admin'
-    }
+      return this.$auth.user.role === 'admin'
+    },
   },
   beforeDestroy() {
     if (this.interval) clearInterval(this.interval)
@@ -198,6 +279,14 @@ export default {
     }
   },
   methods: {
+    getBranch(id) {
+      const branch = this.branches.find((b) => b.id === id)
+      if (branch) {
+        return branch.name
+      } else {
+        return 'None'
+      }
+    },
     formatDate(date) {
       return moment(date).format(moment(date).format('DD-MM-YYYY'))
     },
@@ -212,7 +301,9 @@ export default {
     },
     async fetchOrders() {
       try {
-        const res = await this.$axios.get(`/api/orders/${this.$route.params.shopId}/orders?branch=${this.branch}`)
+        const res = await this.$axios.get(
+          `/api/orders/${this.$route.params.shopId}/orders?branch=${this.branch}`
+        )
         this.orders = []
         this.orders = res.data.filter((order) =>
           moment().isSame(order.createdAt, 'day')
@@ -240,11 +331,11 @@ export default {
       this.socket.emit('orders:confirm', order.id)
     },
     declineOrder(order) {
-        order.status = 'declined'
-        if (this.pendingOrders.length < 1) {
+      order.status = 'declined'
+      if (this.pendingOrders.length < 1) {
         this.beep.pause()
-        }
-        this.socket.emit('orders:decline', order.id)
+      }
+      this.socket.emit('orders:decline', order.id)
     },
     orderReady(order) {
       order.status = 'ready'

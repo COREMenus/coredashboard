@@ -157,6 +157,8 @@ export default async (context, locale) => {
         secondary_font: 'Secondary Font Color',
         accent_color: 'Accent Color',
         background_color: 'Background Color',
+        default_language: 'Default Language',
+        enabled_languages: 'Enabled Languages',
         // * QR CODE GENERATOR
         qr_generator: 'QR Code Generator',
         color: 'Color',

@@ -2,12 +2,21 @@
   <v-container fluid>
     <v-toolbar dark dense rounded="lg">
       <v-toolbar-title>{{ $t('settings') }}</v-toolbar-title>
+      <template #extension>
+        <v-tabs v-model="tab">
+          <v-tabs-slider color="primary"></v-tabs-slider>
+          <v-tab>Currency</v-tab>
+          <v-tab>Language</v-tab>
+          <v-tab>Theme</v-tab>
+        </v-tabs>
+      </template>
     </v-toolbar>
 
-    <v-card class="mt-5">
-      <v-card-text>
-        <v-row>
-          <v-col cols="1">
+    <v-tabs-items v-model="tab" class="mt-5">
+      <!-- * Currency Settings -->
+      <v-tab-item>
+        <v-card>
+          <v-card-text>
             <v-text-field
               outlined
               dense
@@ -15,8 +24,6 @@
               readonly
               :value="symbol"
             ></v-text-field>
-          </v-col>
-          <v-col cols="3">
             <v-select
               v-model="settings.currency"
               outlined
@@ -27,8 +34,6 @@
               item-value="code"
             >
             </v-select>
-          </v-col>
-          <v-col cols="2">
             <v-text-field
               v-model="tax_number"
               max="100"
@@ -39,18 +44,17 @@
               :label="$t('tax')"
               prepend-inner-icon="mdi-percent"
             ></v-text-field>
-          </v-col>
-        </v-row>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn color="primary" @click="save">{{ $t('save') }}</v-btn>
-      </v-card-actions>
-    </v-card>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" @click="save">{{ $t('save') }}</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-tab-item>
 
-    <v-card class="mt-3">
-      <v-card-text>
-        <v-row>
-          <v-col>
+      <!-- * Language Settings -->
+      <v-tab-item>
+        <v-card>
+          <v-card-text>
             <v-select
               v-model="settings.default_language"
               outlined
@@ -60,8 +64,6 @@
               item-text="native"
               item-value="code"
             ></v-select>
-          </v-col>
-          <v-col>
             <v-select
               v-model="settings.enabled_languages"
               multiple
@@ -74,44 +76,39 @@
               item-value="code"
             >
             </v-select>
-          </v-col>
-        </v-row>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn color="primary" @click="save">{{ $t('save') }}</v-btn>
-      </v-card-actions>
-    </v-card>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" @click="save">{{ $t('save') }}</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-tab-item>
 
-    <v-card class="mt-3">
-      <v-card-title>{{ $t('theme') }}</v-card-title>
-      <v-card-text>
-        <v-row>
-          <v-col cols="4">
-            <v-card height="400">
-              <v-card-title> {{ $t('accent_color') }} </v-card-title>
-              <v-card-text>
+      <!-- * Theme Settings -->
+      <v-tab-item>
+        <v-card>
+          <v-card-title>{{ $t('theme') }}</v-card-title>
+          <v-card-text>
+            <v-row justify="center">
+              <v-col>
+                <h2>{{ $t('accent_color') }}</h2>
                 <v-color-picker
                   v-model="settings.accent_color"
                 ></v-color-picker>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col cols="4">
-            <v-card height="400">
-              <v-card-title> {{ $t('background_color') }} </v-card-title>
-              <v-card-text>
+              </v-col>
+              <v-col>
+                <h2>{{ $t('background_color') }}</h2>
                 <v-color-picker
                   v-model="settings.background_color"
                 ></v-color-picker>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn color="primary" @click="save">{{ $t('save') }}</v-btn>
-      </v-card-actions>
-    </v-card>
+              </v-col>
+            </v-row>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" @click="save">{{ $t('save') }}</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
   </v-container>
 </template>
 
@@ -123,6 +120,7 @@ export default {
   data() {
     return {
       tax_number: 0,
+      tab: 0,
       settings: {
         default_language: '',
         enabled_languages: null,

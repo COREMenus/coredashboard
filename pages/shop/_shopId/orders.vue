@@ -4,18 +4,18 @@
       <v-toolbar-title> {{ $t('orders') }}</v-toolbar-title>
       <v-row justify="end">
         <v-col cols="4">
-            <v-select
-        v-model="branch"
-        :items="branches"
-        item-text="name"
-        item-value="id"
-        single-line
-        dense
-        outlined
-        hide-details=""
-        :label="$t('select_branch')"
-        @change="changeBranch"
-      ></v-select>
+          <v-select
+            v-model="branch"
+            :items="branches"
+            item-text="name"
+            item-value="id"
+            single-line
+            dense
+            outlined
+            hide-details=""
+            :label="$t('select_branch')"
+            @change="changeBranch"
+          ></v-select>
         </v-col>
       </v-row>
     </v-toolbar>
@@ -39,7 +39,7 @@
           }}</v-chip>
         </template>
         <template #[`item.actions`]="{ item }">
-          <v-dialog width="900">
+          <v-dialog width="700">
             <template #activator="{ attrs, on }">
               <v-btn v-bind="attrs" icon v-on="on">
                 <v-icon>mdi-eye</v-icon>
@@ -48,27 +48,98 @@
             <v-card>
               <v-card-title>{{ $t('order') }} {{ item.id }}</v-card-title>
               <v-card-text class="text--primary">
+
+                <!-- Order Details -->
                 <v-row>
                   <v-col>
-                    {{ $t('branch') }}:
-                    {{ getBranch(item.BranchId) }}
+                    <v-text-field
+                      dense
+                      readonly
+                      :label="$t('branch')"
+                      :value="getBranch(item.BranchId)"
+                    />
                   </v-col>
                   <v-col>
-                    {{ $t('time') }}: {{ formatDate(item.createdAt) }}
+                    <v-text-field
+                      dense
+                      readonly
+                      :label="$t('time')"
+                      :value="formatDate(item.createdAt)"
+                    />
                   </v-col>
-                  <v-col> {{ $t('type') }}: {{ item.type }} </v-col>
+                  <v-col>
+                    <v-text-field
+                      dense
+                      readonly
+                      :label="$t('type')"
+                      :value="item.type"
+                    />
+                  </v-col>
                   <v-col v-if="item.type === 'car'">
-                    {{ $t('car_number') }}: {{ item.car_number }}
+                    <v-text-field
+                      dense
+                      readonly
+                      :label="$t('car_number')"
+                      :value="item.car_number"
+                    />
                   </v-col>
                   <v-col v-if="item.type === 'table'">
-                    {{ $t('table_number') }}: {{ item.table_number }}
+                    <v-text-field
+                      dense
+                      readonly
+                      :label="$t('table_number')"
+                      :value="item.table_number"
+                    />
                   </v-col>
                 </v-row>
-                <v-data-table
-                  :items="item.orders_products"
-                  :headers="productsHeaders"
-                ></v-data-table>
+
+                <!-- Order Note -->
+                <v-row>
+                  <v-col>
+                    <v-textarea
+                      readonly
+                      label="Notes"
+                      :value="item.note"
+                      rows="2"
+                    />
+                  </v-col>
+                </v-row>
+
+                <!-- Order Items -->
+                <v-list elevation="2" class="mt-5">
+                  <v-subheader>Items</v-subheader>
+                  <v-list-item
+                    v-for="product in item.orders_products"
+                    :key="product.id"
+                  >
+                    <v-list-item-avatar>
+                      <v-img :src="product.product.images[0]"></v-img>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ product.quantity }}x {{ product.product.name }}
+                      </v-list-item-title>
+                      <v-list-subtitle>
+                        {{
+                          product.product_option
+                            ? product.product_option.name
+                            : ''
+                        }}
+                      </v-list-subtitle>
+                    </v-list-item-content>
+                    <v-list-item-action>
+                      <v-btn color="red" icon>
+                        <v-icon>mdi-delete</v-icon>
+                      </v-btn>
+                    </v-list-item-action>
+                  </v-list-item>
+                </v-list>
               </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn>Cancel</v-btn>
+                <v-btn color="green">Save</v-btn>
+              </v-card-actions>
             </v-card>
           </v-dialog>
         </template>
@@ -134,9 +205,7 @@ export default {
       await this.fetchOrders()
       const shop = this.$route.params.shopId
 
-      const res = await this.$axios.get(
-        `/api/branches/${shop}/branches`
-      )
+      const res = await this.$axios.get(`/api/branches/${shop}/branches`)
       this.branches = res.data
     } catch (error) {
       this.$toast.error(this.$t('error_occured'))
@@ -144,16 +213,18 @@ export default {
   },
   methods: {
     getBranch(id) {
-        const branch = this.branches.find((b) => b.id === id)
-        if (branch) {
-            return branch.name
-        } else {
-            return 'None'
-        }
+      const branch = this.branches.find((b) => b.id === id)
+      if (branch) {
+        return branch.name
+      } else {
+        return 'None'
+      }
     },
     changeBranch() {
       try {
-        this.ordersToShow = this.orders.filter(order => order.BranchId === this.branch)
+        this.ordersToShow = this.orders.filter(
+          (order) => order.BranchId === this.branch
+        )
       } catch (error) {}
     },
     formatDate(date) {

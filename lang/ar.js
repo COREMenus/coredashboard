@@ -163,6 +163,8 @@ export default async (context, locale) => {
         secondary_font: 'لون الخط الثانوي',
         accent_color: 'لون التمييز',
         background_color: 'لون الخلفية',
+        default_language: 'اللغة الرئيسية',
+        enabled_languages: 'اللغات المفعله',
         // * QR CODE GENERATOR
         qr_generator: 'مولد رمز ال QR CODE',
         color: 'اللون',
