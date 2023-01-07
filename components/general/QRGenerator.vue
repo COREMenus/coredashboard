@@ -43,7 +43,7 @@ export default {
         qrlink() {
             const color = this.color.split('#').join('')
             const bgColor = this.bg.split('#').join('')
-            return `https://api.qrserver.com/v1/create-qr-code/?data=${this.link}&amp;size=100x100&color=${color}&bgcolor=${bgColor}`
+            return `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(this.link)}&amp;size=100x100&color=${color}&bgcolor=${bgColor}`
         } 
     },
 }
