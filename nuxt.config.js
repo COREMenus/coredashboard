@@ -43,7 +43,7 @@ export default {
     PREMIUM_ANNUAL_PRICE: process.env.PREMIUM_ANNUAL_PRICE
   },
 
-    loading: '~/components/general/Loading.vue',
+    // loading: '~/components/general/Loading.vue',
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: ['@/plugins/i18n.js', '@/plugins/dibsyVault.js', '@/plugins/dibsy.js', '@/plugins/axios.js'],
