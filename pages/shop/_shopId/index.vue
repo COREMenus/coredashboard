@@ -153,9 +153,10 @@ export default {
       }
     },
     subEnd() {
+      const daysLeft = moment(this.$auth.user.next_billing_date).diff(moment(),'days')
       return {
         name: 'days_left',
-        value: moment(this.$auth.user.next_billing_date).diff(moment(),'days'),
+        value: daysLeft < 0 ? 0 : daysLeft,
         icon: 'mdi-clock',
       }
     },

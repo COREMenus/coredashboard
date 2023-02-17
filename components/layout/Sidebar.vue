@@ -12,48 +12,48 @@
       <v-list-item
         v-for="(item, i) in generalRoutes"
         :key="i"
-        :to="localePath({name: item.to, params: { shopId: shop.id }})"
+        :to="localePath({ name: item.to, params: { shopId: shop.id } })"
         exact
-        exact-active-class="primary"
+        exact-active-class=""
       >
-        <v-list-item-icon>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-icon>
+        <template #default="{ active }">
+          <v-list-item-icon>
+            <v-icon :color="active ? 'primary' : ''">{{ item.icon }}</v-icon>
+          </v-list-item-icon>
 
-        <v-list-item-content>
-         {{$t(item.name)}}
-        </v-list-item-content>
+          <v-list-item-content>
+            {{ $t(item.name) }}
+          </v-list-item-content>
+        </template>
       </v-list-item>
     </v-list>
     <v-divider></v-divider>
-    <v-list rounded dense nav>
+    <v-list dense nav>
       <v-list-item disabled>
-        <v-list-item-content> {{$t('menu_settings')}}</v-list-item-content>
+        <v-list-item-content> {{ $t('menu_settings') }}</v-list-item-content>
       </v-list-item>
       <v-list-item
         v-for="(item, i) in menuSettings"
         :key="i"
-        :to="localePath({name: item.to, params: { shopId: shop.id }})"
+        :to="localePath({ name: item.to, params: { shopId: shop.id } })"
         exact
-        exact-active-class="primary white--text"
       >
-        <v-list-item-icon>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-icon>
+        <template #default="{ active }">
+          <v-list-item-icon>
+            <v-icon :color="active ? 'primary' : ''">{{ item.icon }}</v-icon>
+          </v-list-item-icon>
 
-        <v-list-item-content>
-          {{$t(item.name)}}
-        </v-list-item-content>
+          <v-list-item-content>
+            {{ $t(item.name) }}
+          </v-list-item-content>
+        </template>
       </v-list-item>
     </v-list>
     <template #append>
-        <div class="pa-2">
-          <v-btn block>
-            Coremenus V2
-          </v-btn>
-        </div>
-      </template>
-      
+      <div class="pa-2">
+        <v-btn block> Coremenus V2 </v-btn>
+      </div>
+    </template>
   </v-navigation-drawer>
 </template>
 
@@ -82,9 +82,9 @@ export default {
           to: 'shop-shopId-branches',
         },
         {
-            name: 'receive_orders',
-            icon: 'mdi-alarm-light',
-            to: 'shop-shopId-orders_panel'
+          name: 'receive_orders',
+          icon: 'mdi-alarm-light',
+          to: 'shop-shopId-orders_panel',
         },
         {
           name: 'menu_manager',
@@ -121,8 +121,8 @@ export default {
       ],
     }
   },
-    computed: {
-    ...mapState('shop', ['shop'])
+  computed: {
+    ...mapState('shop', ['shop']),
   },
 }
 </script>

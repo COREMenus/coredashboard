@@ -72,7 +72,7 @@ export default {
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
     axios: {
         proxy: true,
-        progress: true,
+        progress: false,
         retry: { retries: 3 }
     },
 
@@ -92,11 +92,11 @@ export default {
             dark: false,
             themes: {
                 light: {
-                    primary: '#FF5349',
+                    primary: '#FF6F28',
                     background: '#f0f2f5'
                 },
                 dark: {
-                    primary: '#FF5349',
+                    primary: '#FF6F28',
                     accent: colors.grey.darken3,
                     secondary: colors.amber.darken3,
                     info: colors.teal.lighten1,

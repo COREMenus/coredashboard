@@ -30,7 +30,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn @click="dialog = false"> {{ $t('cancel') }} </v-btn>
-        <v-btn color="green" dark @click="save">
+        <v-btn color="success" dark @click="save">
           {{ $t('save') }}
         </v-btn>
       </v-card-actions>

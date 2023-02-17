@@ -8,7 +8,6 @@
       <v-card-text>
         <v-list>
           <template v-for="shop, i in shops">
-          
             <v-list-item :key="shop.id">
               <v-list-item-icon><v-icon>mdi-store</v-icon></v-list-item-icon>
               <v-list-item-content>

@@ -1,6 +1,7 @@
 export default function ({ $axios, redirect, $loading }) {
-    $axios.onRequest(config => {
+    $axios.onRequest( config => {
         // console.log('Making request to ' + config.url)
+        
     })
 
     // $axios.onError(error => {

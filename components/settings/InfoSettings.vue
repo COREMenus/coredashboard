@@ -79,7 +79,7 @@
       </v-row>
     </v-card-text>
     <v-card-actions>
-      <v-btn :loading="loading" color="primary" @click="save"> {{$t('save')}} </v-btn>
+      <v-btn :loading="loading" color="success" @click="save"> {{$t('save')}} </v-btn>
     </v-card-actions>
   </v-card>
 </template>

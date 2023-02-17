@@ -34,7 +34,7 @@
           {{ formatTime(item.createdAt) }}
         </template>
         <template #[`item.status`]="{ item }">
-          <v-chip :color="statusColor(item.status)">{{
+          <v-chip dark label :color="statusColor(item.status)">{{
             item.status === 'confirmed' ? 'preparing' : item.status
           }}</v-chip>
         </template>

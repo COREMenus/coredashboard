@@ -46,7 +46,7 @@
             ></v-text-field>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" @click="save">{{ $t('save') }}</v-btn>
+            <v-btn color="success" @click="save">{{ $t('save') }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-tab-item>
@@ -78,7 +78,7 @@
             </v-select>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" @click="save">{{ $t('save') }}</v-btn>
+            <v-btn color="success" @click="save">{{ $t('save') }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-tab-item>
@@ -104,7 +104,7 @@
             </v-row>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" @click="save">{{ $t('save') }}</v-btn>
+            <v-btn color="success" @click="save">{{ $t('save') }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-tab-item>

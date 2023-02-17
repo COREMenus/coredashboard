@@ -18,8 +18,8 @@
       <v-row align="center">
         <!-- Edit -->
         <v-col>
-          <v-btn icon @click="$emit('edit-product', product)">
-            <v-icon>mdi-cog</v-icon>
+          <v-btn @click="$emit('edit-product', product)">
+            <v-icon>mdi-pencil</v-icon>
           </v-btn>
         </v-col>
 

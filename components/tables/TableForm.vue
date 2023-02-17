@@ -26,7 +26,7 @@
         <v-btn v-model="BranchId" @click="dialog = false">
           {{ $t('cancel') }}
         </v-btn>
-        <v-btn color="green" dark @click="save"> {{ $t('save') }} </v-btn>
+        <v-btn color="success" dark @click="save"> {{ $t('save') }} </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

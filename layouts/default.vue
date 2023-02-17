@@ -1,9 +1,8 @@
 /* Default Layout is for Admin, If user is not admin redirect to Panel */
 <template>
   <v-app :style="{ background: $vuetify.theme.themes[theme].background }">
-    <v-system-bar app height="30" color="primary" dark>
-      <v-spacer></v-spacer>
-      <h3>{{ time }}</h3>
+    <v-system-bar v-if="trail" app height="30">
+      <div class="font-weight-medium text-medium text--primary"> {{ daysLeft }} {{ $t('on_trail') }} </div>
     </v-system-bar>
 
     <!-- Sidebar only shows when it's on shop page by checking for shop.id -->
@@ -12,16 +11,13 @@
 
     <v-main>
       <v-container>
-        <v-alert v-if="expired" icon="mdi-alert-box" type="warning">
+        <v-alert v-if="expired" icon="mdi-alert-box" dense class="mb-0">
           {{ $t('no_sub') }}
           <nuxt-link :to="localePath('/subscribe')">
             {{ $t('subscribe') }}
           </nuxt-link>
         </v-alert>
-        <v-alert v-if="trail" type="info" dismissible>
-          {{ daysLeft }} {{ $t('on_trail') }}
-        </v-alert>
-        <v-alert v-if="!valid" type="warning" dismissible>
+        <v-alert v-if="!valid" type="warning" dismissible dense class="mb-0">
           {{ $t('not_verified') }}
         </v-alert>
       </v-container>

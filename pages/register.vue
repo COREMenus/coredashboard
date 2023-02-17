@@ -36,7 +36,8 @@
                   <!-- Email -->
                   <v-text-field
                   ref="email"
-                    v-model="userData.email"
+                  v-model="userData.email"
+                    autocomplete="username"
                     :label="$t('email')"
                     type="email"
                     :rules="emailRules"
@@ -47,8 +48,9 @@
 
                   <!-- Password -->
                   <v-text-field
-                    ref="password"
+                  ref="password"
                     v-model="userData.password"
+                    autocomplete="new-password"
                     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                     :type="showPassword ? 'text' : 'password'"
                     :rules="passwordRules"
@@ -133,8 +135,8 @@ export default {
       loading: false,
       errorMessages: [],
       userData: {
-        username: null,
-        password: null,
+        email: "",
+        password: "",
       },
     }
   },
@@ -142,6 +144,10 @@ export default {
     disabled() {
       return !this.valid
     },
+  },
+  mounted() {
+    const email = this.$route.query.email
+    this.userData.email = typeof email !== "undefined" ? email : ""
   },
   methods: {
     async submit() {

@@ -24,7 +24,7 @@
       >
         <v-spacer></v-spacer>
         <v-btn @click="dialog = false"> {{$t('cancel')}} </v-btn>
-        <v-btn color="primary" :loading="loading" @click="save">
+        <v-btn color="success" :loading="loading" @click="save">
           {{$t('save')}}
         </v-btn>
       </v-card-actions>
