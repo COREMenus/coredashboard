@@ -20,7 +20,7 @@
 
       <v-card-actions
         class="action"
-        :style="{ background: $vuetify.theme.themes[theme].background }"
+        
       >
         <v-spacer></v-spacer>
         <v-btn @click="dialog = false"> {{$t('cancel')}} </v-btn>

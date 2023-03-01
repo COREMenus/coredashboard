@@ -3,11 +3,19 @@
     v-if="shop.id"
     :value="drawer"
     :right="$vuetify.rtl"
-    dark
     :mini-variant="mini"
     app
     permanent
   >
+    <v-list-item v-if="!mini">
+      <v-list-item-content>
+        <v-list-item-title class="text-h6"> Coremenus </v-list-item-title>
+        <v-list-item-subtitle> Version 2.0.1 </v-list-item-subtitle>
+      </v-list-item-content>
+    </v-list-item>
+
+    <v-divider></v-divider>
+
     <v-list dense nav flat>
       <v-list-item
         v-for="(item, i) in generalRoutes"
@@ -29,7 +37,7 @@
     </v-list>
     <v-divider></v-divider>
     <v-list dense nav>
-      <v-list-item disabled>
+      <v-list-item v-if="!mini" disabled>
         <v-list-item-content> {{ $t('menu_settings') }}</v-list-item-content>
       </v-list-item>
       <v-list-item
@@ -49,11 +57,6 @@
         </template>
       </v-list-item>
     </v-list>
-    <template #append>
-      <div class="pa-2">
-        <v-btn block> Coremenus V2 </v-btn>
-      </div>
-    </template>
   </v-navigation-drawer>
 </template>
 

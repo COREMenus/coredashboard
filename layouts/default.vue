@@ -1,6 +1,7 @@
 /* Default Layout is for Admin, If user is not admin redirect to Panel */
 <template>
-  <v-app :style="{ background: $vuetify.theme.themes[theme].background }">
+  <!-- :style="{background: $vuetify.theme.themes[theme].background}" -->
+  <v-app :style="{background: $vuetify.theme.themes[theme].background}">
     <v-system-bar v-if="trail" app height="30">
       <div class="font-weight-medium text-medium text--primary"> {{ daysLeft }} {{ $t('on_trail') }} </div>
     </v-system-bar>
@@ -10,7 +11,9 @@
     <navbar @mini="navBtn" @drawer="drawer = !drawer" @open-settings="$refs.dialog.dialog = true" />
 
     <v-main>
-      <v-container>
+      
+      <!-- <v-container>
+        <h2> Main Dashboard </h2>
         <v-alert v-if="expired" icon="mdi-alert-box" dense class="mb-0">
           {{ $t('no_sub') }}
           <nuxt-link :to="localePath('/subscribe')">
@@ -20,7 +23,7 @@
         <v-alert v-if="!valid" type="warning" dismissible dense class="mb-0">
           {{ $t('not_verified') }}
         </v-alert>
-      </v-container>
+      </v-container> -->
       <nuxt />
     </v-main>
   </v-app>

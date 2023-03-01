@@ -80,8 +80,12 @@ export default {
         '/api/': process.env.API_BASE_URL
     },
 
+    ssr: false,
+
     // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
     vuetify: {
+      customVariables: ['~/assets/variables.scss'],
+      treeShake: true,
         lang: {
             locales: {
                 ar,
@@ -90,20 +94,20 @@ export default {
         },
         theme: {
             dark: false,
+            
             themes: {
                 light: {
-                    primary: '#FF6F28',
-                    background: '#f0f2f5'
+                    primary: '#8C352D',
+                    background: '#F5F7FE'
                 },
                 dark: {
-                    primary: '#FF6F28',
+                    primary: '#8C352D',
                     accent: colors.grey.darken3,
                     secondary: colors.amber.darken3,
                     info: colors.teal.lighten1,
                     warning: colors.amber.base,
                     error: colors.deepOrange.accent4,
                     success: colors.green.accent3,
-                    background: colors.grey.darken4
                 },
             },
         },

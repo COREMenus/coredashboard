@@ -73,7 +73,6 @@
           min="0"
           dense
           :label="$t('price')"
-          prepend-inner-icon="mdi-currency-usd"
         ></v-text-field>
       </v-col>
       <v-col>

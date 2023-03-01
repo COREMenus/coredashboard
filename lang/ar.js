@@ -122,6 +122,8 @@ export default async (context, locale) => {
         table_orders: 'طلبات الطاولات',
         top_products: 'أهم المنتجات',
         revenue: 'الربح',
+        overall_revenue: 'مجموع الربح',
+        overall_orders: 'مجموع الطلبات',
 
         // * Orders
         orders: 'الطلبات',

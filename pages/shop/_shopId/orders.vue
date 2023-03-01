@@ -1,24 +1,24 @@
 <template>
-  <v-container>
-    <v-toolbar dark dense rounded="lg">
-      <v-toolbar-title> {{ $t('orders') }}</v-toolbar-title>
-      <v-row justify="end">
-        <v-col cols="4">
-          <v-select
+  <v-container fluid>
+    <h2> Orders </h2>
+    
+    <v-row>
+      <v-col sm="12" md="6">
+        <v-select
             v-model="branch"
             :items="branches"
             item-text="name"
             item-value="id"
             single-line
             dense
-            outlined
+            solo
+            flat
             hide-details=""
             :label="$t('select_branch')"
             @change="changeBranch"
           ></v-select>
-        </v-col>
-      </v-row>
-    </v-toolbar>
+      </v-col>
+    </v-row>
 
     <v-card class="mt-5">
       <v-data-table
@@ -26,6 +26,7 @@
         :sort-desc="[true, false]"
         :items="ordersToShow"
         :headers="headers"
+        :loading="loading"
       >
         <template #[`item.createdAt`]="{ item }">
           {{ formatDate(item.createdAt) }}
@@ -154,6 +155,7 @@ export default {
   name: 'OrdersPage',
   data() {
     return {
+      loading: true,
       orders: [],
       ordersToShow: [],
       branches: [],
@@ -204,8 +206,8 @@ export default {
     try {
       await this.fetchOrders()
       const shop = this.$route.params.shopId
-
       const res = await this.$axios.get(`/api/branches/${shop}/branches`)
+      this.loading = false
       this.branches = res.data
     } catch (error) {
       this.$toast.error(this.$t('error_occured'))

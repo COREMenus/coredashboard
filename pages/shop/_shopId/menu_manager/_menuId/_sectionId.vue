@@ -24,9 +24,10 @@
     <draggable
       v-bind="dragOptions"
       v-model="currentProducts"
-      class="d-flex flex-column"
+      class="d-flex flex-column v-list"
+      :class="$vuetify.theme.isDark ? 'theme--dark' : 'theme--light'"
       handle=".handle"
-      tag="v-list"
+      tag="div"
       @change="updateListSortOrder"
       @start="drag = true"
       @end="drag = false"

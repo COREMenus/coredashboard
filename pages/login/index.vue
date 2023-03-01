@@ -158,7 +158,7 @@ export default {
 
 <style scoped>
 .banner {
-  background-image: url('/authBanner.png');
+  background-image: url('/authBanner.jpg');
   background-size: contain;
 }
 .slide-enter-active {

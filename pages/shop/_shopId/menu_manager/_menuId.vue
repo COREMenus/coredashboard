@@ -5,11 +5,11 @@
     </v-toolbar>
 
     <v-row class="mt-5">
-      <v-col cols="3">
+      <v-col cols="4">
         <select-section :sections="sections"></select-section>
       </v-col>
 
-      <v-col>
+      <v-col cols="8">
         <nuxt-child :key="$route.fullPath"></nuxt-child>
       </v-col>
     </v-row>
@@ -29,7 +29,6 @@ export default {
   },
   computed: {
     ...mapState('section', ['sections']),
-
   },
   async created() {
     try {

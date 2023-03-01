@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container fluid>
     <section-dialog ref="newForm"></section-dialog>
     <section-dialog ref="editForm" :mode="'edit'"></section-dialog>
     <TranslationDialog ref="translationDialog"></TranslationDialog>
@@ -10,9 +10,9 @@
         <draggable
             v-bind="dragOptions"
             v-model="currentSections"
-            class="d-flex flex-column"
+            class="d-flex flex-column v-list"
             handle=".handle"
-            tag="v-list"
+            tag="div"
             @change="updateListSortOrder"
             @start="drag = true"
             @end="drag = false"
@@ -77,7 +77,7 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-  </div>
+  </v-container>
 </template>
 
 <script>

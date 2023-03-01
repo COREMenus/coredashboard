@@ -33,9 +33,10 @@
     <draggable
       v-bind="dragOptions"
       v-model="currentMenus"
-      class="mt-4"
+      class="mt-5 v-list"
+      :class="$vuetify.theme.isDark ? 'theme--dark' : 'theme--light'"
       handle=".handle"
-      tag="v-list"
+      tag="div"
       @change="updateListSortOrder"
       @start="drag = true"
       @end="drag = false"

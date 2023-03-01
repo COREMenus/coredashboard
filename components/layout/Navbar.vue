@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app dense>
+  <v-app-bar app dense flat>
     <v-app-bar-nav-icon @click="$emit('mini')"></v-app-bar-nav-icon>
     <v-spacer></v-spacer>
     <v-btn icon href="https://guide.coremenus.com" target="_blank">
