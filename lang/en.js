@@ -24,6 +24,8 @@ export default async (context, locale) => {
         type: 'Type',
         active: 'active',
         actions: 'Actions',
+        customer_name: 'Customer Name',
+        notes: 'Notes',
 
         // * Inputs Errors
         required: 'Required',

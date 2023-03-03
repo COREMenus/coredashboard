@@ -90,12 +90,24 @@
                     </v-col>
                   </v-row>
 
+                  <v-row>
+                    <v-col>
+                      <v-text-field
+                        dense
+                        readonly
+                        :label="$t('customer_name')"
+                        :value="item.customer_name">
+
+                      </v-text-field>
+                    </v-col>
+                  </v-row>
+
                   <!-- Order Note -->
                   <v-row>
                     <v-col>
                       <v-textarea
                         readonly
-                        label="Notes"
+                        :label="$t('notes')"
                         :value="item.note"
                         rows="2"
                       />
@@ -103,7 +115,7 @@
                   </v-row>
 
                   <!-- Order Items -->
-                  <v-list elevation="2" class="mt-5">
+                  <v-list class="mt-5">
                     <v-subheader>Items</v-subheader>
                     <v-list-item
                       v-for="product in item.orders_products"
@@ -116,19 +128,19 @@
                         <v-list-item-title>
                           {{ product.quantity }}x {{ product.product.name }}
                         </v-list-item-title>
-                        <v-list-subtitle>
+                        <v-subtitle>
                           {{
                             product.product_option
                               ? product.product_option.name
                               : ''
                           }}
-                        </v-list-subtitle>
+                        </v-subtitle>
                       </v-list-item-content>
-                      <v-list-item-action>
+                      <!-- <v-list-item-action>
                         <v-btn color="red" icon>
                           <v-icon>mdi-delete</v-icon>
                         </v-btn>
-                      </v-list-item-action>
+                      </v-list-item-action> -->
                     </v-list-item>
                   </v-list>
                 </v-card-text>

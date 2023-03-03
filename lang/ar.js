@@ -25,6 +25,8 @@ export default async (context, locale) => {
         type: 'النوع',
         active: 'نشيط',
         actions: 'أجراءات',
+        customer_name: 'اسم العميل',
+        notes: 'ملاحظات',
 
         // * Inputs Errors
         required: 'مطلوب',
