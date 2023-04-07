@@ -1,150 +1,144 @@
 <template>
   <v-container fluid>
-    <h2> Orders </h2>
-    
-    <v-row>
-      <v-col sm="12" md="6">
+    <v-card flat rounded="xl" height="700">
+      <v-card-title>
+        {{ $t('orders') }}
+        <v-spacer></v-spacer>
         <v-select
-            v-model="branch"
-            :items="branches"
-            item-text="name"
-            item-value="id"
-            single-line
-            dense
-            solo
-            flat
-            hide-details=""
-            :label="$t('select_branch')"
-            @change="changeBranch"
-          ></v-select>
-      </v-col>
-    </v-row>
+          v-model="branch"
+          prepend-icon="mdi-store"
+          :items="branches"
+          item-text="name"
+          item-value="id"
+          single-line
+          dense
+          solo
+          flat
+          hide-details=""
+          :label="$t('select_branch')"
+          @change="changeBranch"
+        ></v-select>
+      </v-card-title>
+      <v-card-text>
+        <v-data-table
+          :sort-by="['createdAt']"
+          :sort-desc="[true, false]"
+          :items="ordersToShow"
+          :headers="headers"
+          :loading="loading"
+        >
+          <template #[`item.createdAt`]="{ item }">
+            {{ formatDate(item.createdAt) }}
+          </template>
+          <template #[`item.time`]="{ item }">
+            {{ formatTime(item.createdAt) }}
+          </template>
+          <template #[`item.status`]="{ item }">
+            <v-chip dark label :color="statusColor(item.status)">{{
+              item.status === 'confirmed' ? 'preparing' : item.status
+            }}</v-chip>
+          </template>
+          <template #[`item.actions`]="{ item }">
+            <v-dialog width="700">
+              <template #activator="{ attrs, on }">
+                <v-btn v-bind="attrs" icon v-on="on">
+                  <v-icon>mdi-eye</v-icon>
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>{{ $t('order') }} {{ item.id }}</v-card-title>
+                <v-card-text class="text--primary">
+                  <!-- Order Details -->
+                  <v-row>
+                    <v-col>
+                      <v-text-field
+                        dense
+                        readonly
+                        :label="$t('branch')"
+                        :value="getBranch(item.BranchId)"
+                      />
+                    </v-col>
+                    <v-col>
+                      <v-text-field
+                        dense
+                        readonly
+                        :label="$t('time')"
+                        :value="formatDate(item.createdAt)"
+                      />
+                    </v-col>
+                    <v-col>
+                      <v-text-field
+                        dense
+                        readonly
+                        :label="$t('type')"
+                        :value="item.type"
+                      />
+                    </v-col>
+                    <v-col v-if="item.type === 'car'">
+                      <v-text-field
+                        dense
+                        readonly
+                        :label="$t('car_number')"
+                        :value="item.car_number"
+                      />
+                    </v-col>
+                    <v-col v-if="item.type === 'table'">
+                      <v-text-field
+                        dense
+                        readonly
+                        :label="$t('table_number')"
+                        :value="item.table_number"
+                      />
+                    </v-col>
+                  </v-row>
 
-    <v-card class="mt-5">
-      <v-data-table
-        :sort-by="['createdAt']"
-        :sort-desc="[true, false]"
-        :items="ordersToShow"
-        :headers="headers"
-        :loading="loading"
-      >
-        <template #[`item.createdAt`]="{ item }">
-          {{ formatDate(item.createdAt) }}
-        </template>
-        <template #[`item.time`]="{ item }">
-          {{ formatTime(item.createdAt) }}
-        </template>
-        <template #[`item.status`]="{ item }">
-          <v-chip dark label :color="statusColor(item.status)">{{
-            item.status === 'confirmed' ? 'preparing' : item.status
-          }}</v-chip>
-        </template>
-        <template #[`item.actions`]="{ item }">
-          <v-dialog width="700">
-            <template #activator="{ attrs, on }">
-              <v-btn v-bind="attrs" icon v-on="on">
-                <v-icon>mdi-eye</v-icon>
-              </v-btn>
-            </template>
-            <v-card>
-              <v-card-title>{{ $t('order') }} {{ item.id }}</v-card-title>
-              <v-card-text class="text--primary">
+                  <!-- Order Note -->
+                  <v-row>
+                    <v-col>
+                      <v-textarea
+                        readonly
+                        label="Notes"
+                        :value="item.note"
+                        rows="2"
+                      />
+                    </v-col>
+                  </v-row>
 
-                <!-- Order Details -->
-                <v-row>
-                  <v-col>
-                    <v-text-field
-                      dense
-                      readonly
-                      :label="$t('branch')"
-                      :value="getBranch(item.BranchId)"
-                    />
-                  </v-col>
-                  <v-col>
-                    <v-text-field
-                      dense
-                      readonly
-                      :label="$t('time')"
-                      :value="formatDate(item.createdAt)"
-                    />
-                  </v-col>
-                  <v-col>
-                    <v-text-field
-                      dense
-                      readonly
-                      :label="$t('type')"
-                      :value="item.type"
-                    />
-                  </v-col>
-                  <v-col v-if="item.type === 'car'">
-                    <v-text-field
-                      dense
-                      readonly
-                      :label="$t('car_number')"
-                      :value="item.car_number"
-                    />
-                  </v-col>
-                  <v-col v-if="item.type === 'table'">
-                    <v-text-field
-                      dense
-                      readonly
-                      :label="$t('table_number')"
-                      :value="item.table_number"
-                    />
-                  </v-col>
-                </v-row>
-
-                <!-- Order Note -->
-                <v-row>
-                  <v-col>
-                    <v-textarea
-                      readonly
-                      label="Notes"
-                      :value="item.note"
-                      rows="2"
-                    />
-                  </v-col>
-                </v-row>
-
-                <!-- Order Items -->
-                <v-list elevation="2" class="mt-5">
-                  <v-subheader>Items</v-subheader>
-                  <v-list-item
-                    v-for="product in item.orders_products"
-                    :key="product.id"
-                  >
-                    <v-list-item-avatar>
-                      <v-img :src="product.product.images[0]"></v-img>
-                    </v-list-item-avatar>
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        {{ product.quantity }}x {{ product.product.name }}
-                      </v-list-item-title>
-                      <v-list-subtitle>
-                        {{
-                          product.product_option
-                            ? product.product_option.name
-                            : ''
-                        }}
-                      </v-list-subtitle>
-                    </v-list-item-content>
-                    <v-list-item-action>
-                      <v-btn color="red" icon>
-                        <v-icon>mdi-delete</v-icon>
-                      </v-btn>
-                    </v-list-item-action>
-                  </v-list-item>
-                </v-list>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn>Cancel</v-btn>
-                <v-btn color="green">Save</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </template>
-      </v-data-table>
+                  <!-- Order Items -->
+                  <v-list>
+                    <v-subheader>Items</v-subheader>
+                    <v-list-item
+                      v-for="product in item.orders_products"
+                      :key="product.id"
+                    >
+                      <v-list-item-avatar>
+                        <v-img :src="product.product.images[0]"></v-img>
+                      </v-list-item-avatar>
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          {{ product.quantity }}x {{ product.product.name }}
+                        </v-list-item-title>
+                        <v-list-subtitle>
+                          {{
+                            product.product_option
+                              ? product.product_option.name
+                              : ''
+                          }}
+                        </v-list-subtitle>
+                      </v-list-item-content>
+                      <v-list-item-action>
+                        <v-btn color="red" icon>
+                          <v-icon>mdi-delete</v-icon>
+                        </v-btn>
+                      </v-list-item-action>
+                    </v-list-item>
+                  </v-list>
+                </v-card-text>
+              </v-card>
+            </v-dialog>
+          </template>
+        </v-data-table>
+      </v-card-text>
     </v-card>
   </v-container>
 </template>

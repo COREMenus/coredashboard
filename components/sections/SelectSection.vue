@@ -1,83 +1,92 @@
 <template>
-  <v-container fluid>
+  <div>
     <section-dialog ref="newForm"></section-dialog>
     <section-dialog ref="editForm" :mode="'edit'"></section-dialog>
     <TranslationDialog ref="translationDialog"></TranslationDialog>
     <!-- Section Sidebar -->
-    <v-card height="500" flat>
-      <v-card-title>{{$t('sections')}}</v-card-title>
-      <v-card-text>
-        <draggable
-            v-bind="dragOptions"
-            v-model="currentSections"
-            class="d-flex flex-column v-list"
-            handle=".handle"
-            tag="div"
-            @change="updateListSortOrder"
-            @start="drag = true"
-            @end="drag = false"
-          >
-              <v-list-item
-                v-for="section in currentSections"
-                :key="section.id"
-                nuxt
-                :to="
-                  localePath({
-                    name: 'shop-shopId-menu_manager-menuId-sectionId',
-                    params: {
-                      menuId: $route.params.menuId,
-                      shopId: $route.params.shopId,
-                      sectionId: section.id,
-                    },
-                  })
-                "
-              >
-                <!-- Dragging Handler -->
-                <v-list-item-icon class="handle">
-                  <v-icon> mdi-drag </v-icon></v-list-item-icon
-                >
-
-                <!-- Section Name -->
-                <v-list-item-title> {{ section.name }} </v-list-item-title>
-
-                <!-- Delete and Edit -->
-                <v-list-item-action
-                  ><v-menu offset-y open-on-hover>
-                    <template #activator="{ on, attrs }">
-                      <v-btn icon v-bind="attrs" v-on="on">
-                        <v-icon small>mdi-dots-vertical</v-icon>
-                      </v-btn>
-                    </template>
-                    <v-list dense>
-                      <v-list-item @click="edit(section)">
-                        <v-list-item-title>{{
-                          $t('edit_section')
-                        }}</v-list-item-title>
-                      </v-list-item>
-                      <v-list-item @click="deleteSection(section.id)">
-                        <v-list-item-title>{{
-                          $t('delete_section')
-                        }}</v-list-item-title>
-                      </v-list-item>
-                      <v-list-item @click="translation(section)">
-                        <v-list-item-title>{{
-                          $t('translation')
-                        }}</v-list-item-title>
-                      </v-list-item>
-                    </v-list>
-                  </v-menu></v-list-item-action
-                >
-              </v-list-item>
-          </draggable>
-      </v-card-text>
-      <v-card-actions class="card-footer">
-        <v-btn block color="green" dark outlined @click="newSection">
-          <v-icon left>mdi-plus</v-icon>
-          {{ $t('new_section') }}
+    <v-card min-height="700" rounded="xl" width="250" flat>
+      <v-card-title class="text-body-2">
+        {{ $t('sections') }}
+        <v-spacer></v-spacer>
+        <v-btn
+          class="text-caption"
+          depressed
+          icon
+          large
+          color="success"
+          @click="newSection"
+        >
+          <v-icon>mdi-plus</v-icon>
         </v-btn>
-      </v-card-actions>
+      </v-card-title>
+      <v-card-text class="text-body-2">
+        <draggable
+          v-bind="dragOptions"
+          v-model="currentSections"
+          class="d-flex flex-column v-list"
+          handle=".handle"
+          tag="div"
+          @change="updateListSortOrder"
+          @start="drag = true"
+          @end="drag = false"
+        >
+          <v-list-item
+            v-for="section in currentSections"
+            :key="section.id"
+            nuxt
+            :to="
+              localePath({
+                name: 'shop-shopId-menu_manager-menuId-sectionId',
+                params: {
+                  menuId: $route.params.menuId,
+                  shopId: $route.params.shopId,
+                  sectionId: section.id,
+                },
+              })
+            "
+          >
+            <!-- Dragging Handler -->
+            <v-list-item-icon class="handle">
+              <v-icon> mdi-drag </v-icon></v-list-item-icon
+            >
+
+            <!-- Section Name -->
+            <v-list-item-title class="text-body-2">
+              {{ section.name }}
+            </v-list-item-title>
+
+            <!-- Delete and Edit -->
+            <v-list-item-action
+              ><v-menu offset-y open-on-hover>
+                <template #activator="{ on, attrs }">
+                  <v-btn icon v-bind="attrs" v-on="on">
+                    <v-icon small>mdi-dots-vertical</v-icon>
+                  </v-btn>
+                </template>
+                <v-list dense>
+                  <v-list-item @click="edit(section)">
+                    <v-list-item-title>{{
+                      $t('edit_section')
+                    }}</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item @click="deleteSection(section.id)">
+                    <v-list-item-title>{{
+                      $t('delete_section')
+                    }}</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item @click="translation(section)">
+                    <v-list-item-title>{{
+                      $t('translation')
+                    }}</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu></v-list-item-action
+            >
+          </v-list-item>
+        </draggable>
+      </v-card-text>
     </v-card>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -135,8 +144,8 @@ export default {
       this.$refs.newForm.dialog = true
     },
     translation(section) {
-        this.setEditSection(section)
-        this.$refs.translationDialog.dialog = true
+      this.setEditSection(section)
+      this.$refs.translationDialog.dialog = true
     },
     updateListSortOrder(e) {
       const newList = [...this.sections].map((item, index) => {
@@ -146,7 +155,7 @@ export default {
         if (item.order !== newSort) {
           this.updateSectionOrder({
             id: item.id,
-            order: newSort
+            order: newSort,
           })
         }
         return item

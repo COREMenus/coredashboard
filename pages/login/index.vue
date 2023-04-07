@@ -1,10 +1,14 @@
 <template>
-  <v-container class="banner" fluid fill-height>
+  <v-container fluid  fill-height>
     <ForgotPasswordDialog ref="forgotPassword"></ForgotPasswordDialog>
-    <v-row align="center" justify="center">
-      <v-col lg="4" md="7" sm="8">
-        <!-- Error Alert -->
-        <transition name="slide">
+    <v-row>
+      <v-col class="banner">
+        <v-img :src="logo" width="200"></v-img>
+      </v-col>
+      <v-col class="form-container">
+       <div>
+         <!-- Error Alert -->
+         <transition name="slide">
           <v-alert v-if="error" outlined type="error">
             <span v-for="(message, i) in errorMessages" :key="i">{{
               message
@@ -95,6 +99,7 @@
             </div>
           </v-card-text>
         </v-card>
+       </div>
       </v-col>
     </v-row>
   </v-container>
@@ -102,6 +107,7 @@
 
 <script>
 import ForgotPasswordDialog from '~/components/auth/ForgotPasswordDialog.vue'
+import whiteLogo from '~/assets/img/white-logo.png'
 export default {
   valid: false,
   name: 'LoginPage',
@@ -110,6 +116,7 @@ export default {
   layout: 'auth',
   data() {
     return {
+      logo: whiteLogo,
       valid: false,
       emailRules: [
         (v) => !!v || 'E-mail is required',
@@ -158,8 +165,26 @@ export default {
 
 <style scoped>
 .banner {
-  background-image: url('/authBanner.jpg');
-  background-size: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #823B31;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
 }
 .slide-enter-active {
   transition: all 0.5s;

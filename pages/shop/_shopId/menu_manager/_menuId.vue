@@ -4,15 +4,15 @@
       <v-toolbar-title>{{ $t('menu_manager') }}</v-toolbar-title>
     </v-toolbar>
 
-    <v-row class="mt-5">
-      <v-col cols="4">
+    <div class="mt-5 d-flex" no-gutters>
+      <div class="mr-5">
         <select-section :sections="sections"></select-section>
-      </v-col>
+      </div>
 
-      <v-col cols="8">
+      <div class="flex-grow-1">
         <nuxt-child :key="$route.fullPath"></nuxt-child>
-      </v-col>
-    </v-row>
+      </div>
+    </div>
   </v-container>
 </template>
 

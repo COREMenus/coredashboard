@@ -54,7 +54,6 @@ export default {
 
 <style>
 .main {
-    background:linear-gradient(180deg,#F5F9FF 33%,#FFFFFF 33%);
-  background:-webkit-linear-gradient(180deg,#F5F9FF 33%,#FFFFFF 33%);
+    background: white;
 }
 </style>

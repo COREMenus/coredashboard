@@ -3,49 +3,46 @@
     <branches-forms ref="createForm" />
     <branches-forms ref="editForm" :mode="'edit'" />
 
-    <v-toolbar flat dark rounded="lg" dense>
-      <v-toolbar-title> {{ $t('branches') }} </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn color="green" small @click="createBranch">
-        {{ $t('create_branch') }}
-      </v-btn>
-    </v-toolbar>
-
-    <v-alert v-if="branches.length > $auth.user.max_branches" type="warning" outlined class="mt-5" dense>
-        {{$t('max_branches')}}
+    <v-alert
+      v-if="branches.length > $auth.user.max_branches"
+      type="warning"
+      outlined
+      class="mt-5"
+      dense
+    >
+      {{ $t('max_branches') }}
     </v-alert>
-    <v-row class="mt-5">
-      <!-- Branch Data Table -->
-      <v-col>
-        <v-card height="500">
-          <v-card-text>
-            <v-data-table
-              :loading="loading"
-              :headers="headers"
-              :items="branches"
-            >
-              <!-- active checkbox -->
-              <template #[`item.active`]="{ item }">
-                <v-checkbox
-                  :input-value="item.active"
-                  @change="toggle(item)"
-                ></v-checkbox>
-              </template>
+    <v-card height="700" flat rounded="xl">
+      <v-card-title>
+        {{ $t('branches') }}
+        <v-spacer></v-spacer>
+        <v-btn color="success" small depressed @click="createBranch">
+          <v-icon left>mdi-plus</v-icon>
+          {{ $t('create_branch') }}
+        </v-btn>
+      </v-card-title>
+      <v-card-text>
+        <v-data-table :loading="loading" :headers="headers" :items="branches">
+          <!-- active checkbox -->
+          <template #[`item.active`]="{ item }">
+            <v-checkbox
+              :input-value="item.active"
+              @change="toggle(item)"
+            ></v-checkbox>
+          </template>
 
-              <!-- actions -->
-              <template #[`item.actions`]="{ item }">
-                <v-btn color="orange" icon @click="editBranch(item)">
-                  <v-icon>mdi-pencil </v-icon>
-                </v-btn>
-                <v-btn color="red" icon @click="dBranch(item)">
-                  <v-icon>mdi-delete</v-icon>
-                </v-btn>
-              </template>
-            </v-data-table>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+          <!-- actions -->
+          <template #[`item.actions`]="{ item }">
+            <v-btn color="orange" icon @click="editBranch(item)">
+              <v-icon>mdi-pencil </v-icon>
+            </v-btn>
+            <v-btn color="red" icon @click="dBranch(item)">
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
+          </template>
+        </v-data-table>
+      </v-card-text>
+    </v-card>
   </v-container>
 </template>
 

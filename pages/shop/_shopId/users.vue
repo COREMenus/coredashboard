@@ -3,13 +3,15 @@
     <UsersDialog ref="newForm"></UsersDialog>
     <UsersDialog ref="editForm" :mode="'edit'"></UsersDialog>
 
-    <v-toolbar dense dark rounded="lg">
-      <v-toolbar-title> {{$t('users')}} </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn color="green" @click="newUser"> {{$t('new_user')}} </v-btn>
-    </v-toolbar>
-
-    <v-card class="mt-3">
+    <v-card flat rounded="xl" height="700">
+      <v-card-title>
+        {{$t('users')}}
+        <v-spacer></v-spacer>
+        <v-btn color="success" depressed @click="newUser">
+          <v-icon left>mdi-plus</v-icon>
+           {{$t('new_user')}} 
+        </v-btn>
+      </v-card-title>
       <v-card-text>
         <v-data-table :items="users" :headers="headers">
           <template #[`item.date`]="{ item }">

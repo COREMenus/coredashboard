@@ -1,6 +1,11 @@
 <template>
   <v-app-bar app dense flat>
-    <v-app-bar-nav-icon @click="$emit('mini')"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click="toggleMini">
+      <template #default>
+        <v-icon v-if="mini">mdi-chevron-right</v-icon>
+        <v-icon v-else>mdi-chevron-left</v-icon>
+      </template>
+    </v-app-bar-nav-icon>
     <v-spacer></v-spacer>
     <v-btn icon href="https://guide.coremenus.com" target="_blank">
       <v-icon> mdi-help</v-icon>
@@ -17,7 +22,16 @@ import Dropdown from './Dropdown.vue'
 export default {
   name: 'NavbarComponent',
   components: { Dropdown },
+  data() {
+    return {
+      mini: false
+    }
+  },
   methods: {
+    toggleMini() {
+      this.mini = !this.mini
+      this.$emit('mini')
+    },
     changeTheme() {
         this.$vuetify.theme.dark = !this.$vuetify.theme.dark
         if (process.client) {

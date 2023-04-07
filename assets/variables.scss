@@ -16,3 +16,9 @@
 // );
 
 // $material-dark: map-merge($material-dark, $dark-theme);
+$body-font-family: 'Nunito Sans', sans-serif;
+$heading-font-family: 'Nunito Sans', sans-serif;
+$font-size-root: 18px;
+$navigation-drawer-border-color: #FFFFFF;
+$navigation-drawer-border-width: 0px;
+@import '~vuetify/src/styles/styles.sass';

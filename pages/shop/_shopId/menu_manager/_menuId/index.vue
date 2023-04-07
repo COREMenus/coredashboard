@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card class="mt-3">
+    <v-card flat rounded="xl" min-height="700">
       <v-card-title>
         Top Items Sales
         <v-spacer> </v-spacer>

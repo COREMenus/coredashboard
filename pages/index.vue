@@ -46,6 +46,8 @@ export default {
     try {
         const res = await this.$axios.get('/api/shops')
         this.shops = res.data
+        const firstShop = this.shops[0]
+        this.$router.push(this.localePath({name: 'shop-shopId', params: { shopId: firstShop.id }}))
     } catch (error) {
         this.$axios.error(this.$t('error_occured'))
     }

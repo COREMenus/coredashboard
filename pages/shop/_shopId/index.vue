@@ -1,7 +1,21 @@
 <template>
   <v-container fluid>
     <h2>Main Dashboard</h2>
-    <v-row>
+
+    <!-- <v-card flat rounded="lg">
+      <v-card-title>{{ $t('onboarding') }}</v-card-title>
+      <v-card-text>
+        <v-list>
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>  Create a Branch for your store </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-card-text>
+    </v-card> -->
+
+    <v-row class="mt-5">
       <v-col md="6" sm="12">
         <v-select
           v-model="branch"
@@ -70,7 +84,7 @@ export default {
       revenueChart: null,
       ordersChart: null,
       revenueAnalytics: { count: 0 },
-      ordersAnalytics: { count: 0 }
+      ordersAnalytics: { count: 0 },
     }
   },
 

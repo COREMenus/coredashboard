@@ -1,23 +1,21 @@
 <template>
-  <v-container>
-    <v-toolbar dense flat rounded="lg" dark>
-      <v-row align="center">
-        <v-col cols="4">
-          <v-select
-            v-model="branch"
-            :items="branches"
-            item-text="name"
-            item-value="id"
-            single-line
-            hide-details=""
-            :label="$t('select_branch')"
-            @change="changeBranch"
-          ></v-select>
-        </v-col>
-      </v-row>
-    </v-toolbar>
-    <v-card class="mt-5">
-      <v-card-title> {{ $t('todays_orders') }} </v-card-title>
+  <v-container fluid>
+    <v-card flat height="700" rounded="xl">
+      <v-card-title>
+        {{ $t('todays_orders') }}
+        <v-spacer></v-spacer>
+        <v-select
+          v-model="branch"
+          :items="branches"
+          item-text="name"
+          item-value="id"
+          single-line
+          hide-details
+          prepend-icon="mdi-store"
+          :label="$t('select_branch')"
+          @change="changeBranch"
+        ></v-select>
+      </v-card-title>
       <v-card-text>
         <v-data-table
           :sort-by="['createdAt']"
@@ -96,8 +94,8 @@
                         dense
                         readonly
                         :label="$t('customer_name')"
-                        :value="item.customer_name">
-
+                        :value="item.customer_name"
+                      >
                       </v-text-field>
                     </v-col>
                   </v-row>

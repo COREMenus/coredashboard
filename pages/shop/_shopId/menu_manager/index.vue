@@ -4,54 +4,60 @@
     <menu-dialog ref="newForm"></menu-dialog>
     <branches-dialog ref="branchesManager"></branches-dialog>
     <translation-dialog ref="translation"></translation-dialog>
-    <v-overlay :value="loading">
-      <v-progress-circular indeterminate color="primary"></v-progress-circular
-    ></v-overlay>
 
-    <v-toolbar flat dense dark rounded="lg">
-      <v-toolbar-title>{{ $t('menu_manager') }}</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn small depressed color="green" dark @click="createMenu">
-        {{ $t('create_menu') }}
-      </v-btn>
-    </v-toolbar>
+    <v-card height="700" flat rounded="xl">
+      <v-card-title>
+        {{ $t('menu_manager') }}
+        <v-spacer></v-spacer>
+        <v-btn small depressed color="green" dark @click="createMenu">
+          <v-icon left>mdi-plus</v-icon>
+          {{ $t('create_menu') }}
+        </v-btn>
+      </v-card-title>
+      <v-card-text>
+        <div
+          v-if="menus.length === 0 && !loading"
+          class="d-flex flex-column align-center"
+        >
+          <img src="~/assets/img/no-menus.svg" height="200" />
+          <h2 class="mt-3">{{ $t('no_menu') }}</h2>
+          <v-btn
+            large
+            class="mt-3"
+            depressed
+            color="green"
+            dark
+            @click="createMenu"
+          >
+            <v-icon left>mdi-plus</v-icon>
+            {{ $t('create_menu') }}
+          </v-btn>
+        </div>
 
-    <v-col v-if="menus.length === 0 && !loading"
-      ><v-alert
-        type="info"
-        color="primary"
-        dense
-        prominent
-        border="left"
-        dark
-        rounded="lg"
-      >
-        {{ $t('no_menu') }}
-      </v-alert></v-col
-    >
-
-    <draggable
-      v-bind="dragOptions"
-      v-model="currentMenus"
-      class="mt-5 v-list"
-      :class="$vuetify.theme.isDark ? 'theme--dark' : 'theme--light'"
-      handle=".handle"
-      tag="div"
-      @change="updateListSortOrder"
-      @start="drag = true"
-      @end="drag = false"
-    >
-      <template v-for="menu in menus">
-        <menu-card
-        :key="menu.id"
-          :menu="menu"
-          @editMenu="edit"
-          @manageBranches="manageBranches"
-          @deleteMenu="deleteM"
-          @translation="openTranslation"
-        />
-      </template>
-    </draggable>
+        <draggable
+          v-bind="dragOptions"
+          v-model="currentMenus"
+          class="mt-5 v-list"
+          :class="$vuetify.theme.isDark ? 'theme--dark' : 'theme--light'"
+          handle=".handle"
+          tag="div"
+          @change="updateListSortOrder"
+          @start="drag = true"
+          @end="drag = false"
+        >
+          <template v-for="menu in menus">
+            <menu-card
+              :key="menu.id"
+              :menu="menu"
+              @editMenu="edit"
+              @manageBranches="manageBranches"
+              @deleteMenu="deleteM"
+              @translation="openTranslation"
+            />
+          </template>
+        </draggable>
+      </v-card-text>
+    </v-card>
   </v-container>
 </template>
 
@@ -149,9 +155,7 @@ export default {
         })
         this.setMenus(newList)
         this.$toast.success(this.$t('saved'))
-      } catch (error) {
-        
-      }
+      } catch (error) {}
     },
   },
 }

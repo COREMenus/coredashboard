@@ -4,6 +4,8 @@
     :value="drawer"
     :right="$vuetify.rtl"
     :mini-variant="mini"
+    class="text-body-2"
+    width="200"
     app
     permanent
   >
@@ -14,15 +16,13 @@
       </v-list-item-content>
     </v-list-item>
 
-    <v-divider></v-divider>
-
-    <v-list dense nav flat>
+    <v-list dense nav>
       <v-list-item
         v-for="(item, i) in generalRoutes"
         :key="i"
         :to="localePath({ name: item.to, params: { shopId: shop.id } })"
         exact
-        exact-active-class=""
+        exact-active-class="active"
       >
         <template #default="{ active }">
           <v-list-item-icon>
@@ -45,6 +45,7 @@
         :key="i"
         :to="localePath({ name: item.to, params: { shopId: shop.id } })"
         exact
+        exact-active-class="active"
       >
         <template #default="{ active }">
           <v-list-item-icon>
@@ -104,6 +105,11 @@ export default {
           icon: 'mdi-message-reply-text',
           to: 'shop-shopId-feedbacks',
         },
+        // {
+        //   name: 'integrations',
+        //   icon: 'mdi-puzzle-plus',
+        //   to: 'shop-shopId-integrations'
+        // }
       ],
       menuSettings: [
         {
@@ -130,4 +136,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.active {
+  
+}
+</style>

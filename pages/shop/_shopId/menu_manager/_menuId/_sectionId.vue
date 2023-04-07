@@ -1,46 +1,64 @@
 <template>
-  <div>
+  <v-container>
     <!-- New Product Dialog -->
     <product-dialog ref="newForm" :mode="'new'" />
     <product-dialog ref="editForm" :mode="'edit'" />
 
-    <!-- Toolbar -->
-    <v-toolbar flat dense class="rounded-lg">
-      <v-btn dark small class="rounded-md" color="green" @click="newProduct">
-        {{ $t('new_product') }}
-      </v-btn>
-    </v-toolbar>
-
-    <!-- No Product Warn -->
-    <v-row v-if="products.length < 1" class="mt-2">
-      <v-col>
-        <v-alert dense type="info">
-          {{ $t('no_product') }}
-        </v-alert>
-      </v-col>
-    </v-row>
-
-    <!-- Product List -->
-    <draggable
-      v-bind="dragOptions"
-      v-model="currentProducts"
-      class="d-flex flex-column v-list"
-      :class="$vuetify.theme.isDark ? 'theme--dark' : 'theme--light'"
-      handle=".handle"
-      tag="div"
-      @change="updateListSortOrder"
-      @start="drag = true"
-      @end="drag = false"
-    >
-      <products-card
-      v-for="product in currentProducts"
-      :key="product.id"
-        :product="product"
-        @edit-product="editProduct"
-        @delete-product="dProduct"
-      ></products-card>
-    </draggable>
-  </div>
+    <v-card flat min-height="700" rounded="xl">
+      <v-card-title>
+        {{ $t('products') }}
+        <v-spacer></v-spacer>
+        <v-btn
+          small
+          class="mt-3"
+          depressed
+          color="green"
+          dark
+          @click="newProduct"
+        >
+          <v-icon left>mdi-plus</v-icon>
+          {{ $t('new_product') }}
+        </v-btn>
+      </v-card-title>
+      <v-card-text>
+        <div v-if="products.length < 1" class="d-flex flex-column align-center">
+          <img src="~/assets/img/no-products.svg" height="200" />
+          <h2 class="mt-3">{{ $t('no_product') }}</h2>
+          <v-btn
+            large
+            class="mt-3"
+            depressed
+            color="green"
+            dark
+            @click="newProduct"
+          >
+            <v-icon left>mdi-plus</v-icon>
+            {{ $t('new_product') }}
+          </v-btn>
+        </div>
+        <!-- Product List -->
+        <draggable
+          v-bind="dragOptions"
+          v-model="currentProducts"
+          class="d-flex flex-column v-list"
+          :class="$vuetify.theme.isDark ? 'theme--dark' : 'theme--light'"
+          handle=".handle"
+          tag="div"
+          @change="updateListSortOrder"
+          @start="drag = true"
+          @end="drag = false"
+        >
+          <products-card
+            v-for="product in currentProducts"
+            :key="product.id"
+            :product="product"
+            @edit-product="editProduct"
+            @delete-product="dProduct"
+          ></products-card>
+        </draggable>
+      </v-card-text>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
